@@ -1,0 +1,876 @@
+{
+ "duration": 39.9,
+ "scenes": {
+  "problem": [
+   0.0,
+   19.927
+  ],
+  "cache-aside": [
+   19.927,
+   39.9
+  ]
+ },
+ "cues": {
+  "app": 2.473,
+  "requests": 6.736,
+  "traffic-up": 12.441,
+  "db-red": 15.843,
+  "cache-in": 17.184,
+  "pattern": 22.409,
+  "check-42": 26.952,
+  "hit": 30.598,
+  "check-88": 32.241,
+  "miss": 34.564,
+  "db-read": 35.425,
+  "write-back": 37.929
+ },
+ "captions": [
+  {
+   "text": "Here's",
+   "startMs": 71,
+   "endMs": 311,
+   "timestampMs": 71,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 351,
+   "endMs": 391,
+   "timestampMs": 351,
+   "confidence": null
+  },
+  {
+   "text": " normal",
+   "startMs": 431,
+   "endMs": 692,
+   "timestampMs": 431,
+   "confidence": null
+  },
+  {
+   "text": " app:",
+   "startMs": 832,
+   "endMs": 972,
+   "timestampMs": 832,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 1332,
+   "endMs": 1372,
+   "timestampMs": 1332,
+   "confidence": null
+  },
+  {
+   "text": " server",
+   "startMs": 1432,
+   "endMs": 1752,
+   "timestampMs": 1432,
+   "confidence": null
+  },
+  {
+   "text": " and",
+   "startMs": 1792,
+   "endMs": 1872,
+   "timestampMs": 1792,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 1912,
+   "endMs": 1953,
+   "timestampMs": 1912,
+   "confidence": null
+  },
+  {
+   "text": " database.",
+   "startMs": 1993,
+   "endMs": 2473,
+   "timestampMs": 1993,
+   "confidence": null
+  },
+  {
+   "text": " Every",
+   "startMs": 3133,
+   "endMs": 3314,
+   "timestampMs": 3133,
+   "confidence": null
+  },
+  {
+   "text": " time",
+   "startMs": 3354,
+   "endMs": 3594,
+   "timestampMs": 3354,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 3654,
+   "endMs": 3714,
+   "timestampMs": 3654,
+   "confidence": null
+  },
+  {
+   "text": " user",
+   "startMs": 3834,
+   "endMs": 4134,
+   "timestampMs": 3834,
+   "confidence": null
+  },
+  {
+   "text": " asks",
+   "startMs": 4254,
+   "endMs": 4495,
+   "timestampMs": 4254,
+   "confidence": null
+  },
+  {
+   "text": " for",
+   "startMs": 4535,
+   "endMs": 4655,
+   "timestampMs": 4535,
+   "confidence": null
+  },
+  {
+   "text": " data,",
+   "startMs": 4675,
+   "endMs": 4995,
+   "timestampMs": 4675,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 5175,
+   "endMs": 5255,
+   "timestampMs": 5175,
+   "confidence": null
+  },
+  {
+   "text": " server",
+   "startMs": 5295,
+   "endMs": 5595,
+   "timestampMs": 5295,
+   "confidence": null
+  },
+  {
+   "text": " reads",
+   "startMs": 5635,
+   "endMs": 5876,
+   "timestampMs": 5635,
+   "confidence": null
+  },
+  {
+   "text": " it",
+   "startMs": 5916,
+   "endMs": 5976,
+   "timestampMs": 5916,
+   "confidence": null
+  },
+  {
+   "text": " from",
+   "startMs": 5996,
+   "endMs": 6136,
+   "timestampMs": 5996,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 6156,
+   "endMs": 6216,
+   "timestampMs": 6156,
+   "confidence": null
+  },
+  {
+   "text": " database.",
+   "startMs": 6256,
+   "endMs": 6736,
+   "timestampMs": 6256,
+   "confidence": null
+  },
+  {
+   "text": " At",
+   "startMs": 7337,
+   "endMs": 7417,
+   "timestampMs": 7337,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 7437,
+   "endMs": 7457,
+   "timestampMs": 7437,
+   "confidence": null
+  },
+  {
+   "text": " handful",
+   "startMs": 7497,
+   "endMs": 7877,
+   "timestampMs": 7497,
+   "confidence": null
+  },
+  {
+   "text": " of",
+   "startMs": 7897,
+   "endMs": 7977,
+   "timestampMs": 7897,
+   "confidence": null
+  },
+  {
+   "text": " requests",
+   "startMs": 8037,
+   "endMs": 8478,
+   "timestampMs": 8037,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 8518,
+   "endMs": 8558,
+   "timestampMs": 8518,
+   "confidence": null
+  },
+  {
+   "text": " second,",
+   "startMs": 8598,
+   "endMs": 8918,
+   "timestampMs": 8598,
+   "confidence": null
+  },
+  {
+   "text": " that's",
+   "startMs": 9298,
+   "endMs": 9518,
+   "timestampMs": 9298,
+   "confidence": null
+  },
+  {
+   "text": " fine.",
+   "startMs": 9579,
+   "endMs": 9899,
+   "timestampMs": 9579,
+   "confidence": null
+  },
+  {
+   "text": " But",
+   "startMs": 10399,
+   "endMs": 10539,
+   "timestampMs": 10399,
+   "confidence": null
+  },
+  {
+   "text": " watch",
+   "startMs": 10579,
+   "endMs": 10819,
+   "timestampMs": 10579,
+   "confidence": null
+  },
+  {
+   "text": " what",
+   "startMs": 10860,
+   "endMs": 11000,
+   "timestampMs": 10860,
+   "confidence": null
+  },
+  {
+   "text": " happens",
+   "startMs": 11040,
+   "endMs": 11460,
+   "timestampMs": 11040,
+   "confidence": null
+  },
+  {
+   "text": " as",
+   "startMs": 11560,
+   "endMs": 11660,
+   "timestampMs": 11560,
+   "confidence": null
+  },
+  {
+   "text": " traffic",
+   "startMs": 11700,
+   "endMs": 12060,
+   "timestampMs": 11700,
+   "confidence": null
+  },
+  {
+   "text": " grows.",
+   "startMs": 12080,
+   "endMs": 12441,
+   "timestampMs": 12080,
+   "confidence": null
+  },
+  {
+   "text": " Reads",
+   "startMs": 12961,
+   "endMs": 13201,
+   "timestampMs": 12961,
+   "confidence": null
+  },
+  {
+   "text": " from",
+   "startMs": 13241,
+   "endMs": 13402,
+   "timestampMs": 13241,
+   "confidence": null
+  },
+  {
+   "text": " disk",
+   "startMs": 13442,
+   "endMs": 13742,
+   "timestampMs": 13442,
+   "confidence": null
+  },
+  {
+   "text": " are",
+   "startMs": 13822,
+   "endMs": 13922,
+   "timestampMs": 13822,
+   "confidence": null
+  },
+  {
+   "text": " slow,",
+   "startMs": 13982,
+   "endMs": 14302,
+   "timestampMs": 13982,
+   "confidence": null
+  },
+  {
+   "text": " and",
+   "startMs": 14442,
+   "endMs": 14522,
+   "timestampMs": 14442,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 14542,
+   "endMs": 14622,
+   "timestampMs": 14542,
+   "confidence": null
+  },
+  {
+   "text": " database",
+   "startMs": 14642,
+   "endMs": 15063,
+   "timestampMs": 14642,
+   "confidence": null
+  },
+  {
+   "text": " starts",
+   "startMs": 15103,
+   "endMs": 15383,
+   "timestampMs": 15103,
+   "confidence": null
+  },
+  {
+   "text": " to",
+   "startMs": 15423,
+   "endMs": 15523,
+   "timestampMs": 15423,
+   "confidence": null
+  },
+  {
+   "text": " choke.",
+   "startMs": 15563,
+   "endMs": 15843,
+   "timestampMs": 15563,
+   "confidence": null
+  },
+  {
+   "text": " So",
+   "startMs": 16264,
+   "endMs": 16384,
+   "timestampMs": 16264,
+   "confidence": null
+  },
+  {
+   "text": " we",
+   "startMs": 16424,
+   "endMs": 16544,
+   "timestampMs": 16424,
+   "confidence": null
+  },
+  {
+   "text": " keep",
+   "startMs": 16564,
+   "endMs": 16744,
+   "timestampMs": 16564,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 16784,
+   "endMs": 16804,
+   "timestampMs": 16784,
+   "confidence": null
+  },
+  {
+   "text": " copy",
+   "startMs": 16864,
+   "endMs": 17184,
+   "timestampMs": 16864,
+   "confidence": null
+  },
+  {
+   "text": " somewhere",
+   "startMs": 17245,
+   "endMs": 17645,
+   "timestampMs": 17245,
+   "confidence": null
+  },
+  {
+   "text": " much",
+   "startMs": 17705,
+   "endMs": 17905,
+   "timestampMs": 17705,
+   "confidence": null
+  },
+  {
+   "text": " faster:",
+   "startMs": 17965,
+   "endMs": 18425,
+   "timestampMs": 17965,
+   "confidence": null
+  },
+  {
+   "text": " an",
+   "startMs": 18886,
+   "endMs": 18990,
+   "timestampMs": 18886,
+   "confidence": null
+  },
+  {
+   "text": " in-memory",
+   "startMs": 18990,
+   "endMs": 19406,
+   "timestampMs": 18990,
+   "confidence": null
+  },
+  {
+   "text": " cache.",
+   "startMs": 19446,
+   "endMs": 19787,
+   "timestampMs": 19446,
+   "confidence": null
+  },
+  {
+   "text": " The",
+   "startMs": 20067,
+   "endMs": 20147,
+   "timestampMs": 20067,
+   "confidence": null
+  },
+  {
+   "text": " most",
+   "startMs": 20187,
+   "endMs": 20407,
+   "timestampMs": 20187,
+   "confidence": null
+  },
+  {
+   "text": " common",
+   "startMs": 20487,
+   "endMs": 20787,
+   "timestampMs": 20487,
+   "confidence": null
+  },
+  {
+   "text": " pattern",
+   "startMs": 20827,
+   "endMs": 21208,
+   "timestampMs": 20827,
+   "confidence": null
+  },
+  {
+   "text": " is",
+   "startMs": 21248,
+   "endMs": 21328,
+   "timestampMs": 21248,
+   "confidence": null
+  },
+  {
+   "text": " called",
+   "startMs": 21388,
+   "endMs": 21688,
+   "timestampMs": 21388,
+   "confidence": null
+  },
+  {
+   "text": " cache-aside.",
+   "startMs": 21748,
+   "endMs": 22409,
+   "timestampMs": 21748,
+   "confidence": null
+  },
+  {
+   "text": " A",
+   "startMs": 22909,
+   "endMs": 22949,
+   "timestampMs": 22909,
+   "confidence": null
+  },
+  {
+   "text": " request",
+   "startMs": 22989,
+   "endMs": 23449,
+   "timestampMs": 22989,
+   "confidence": null
+  },
+  {
+   "text": " for",
+   "startMs": 23509,
+   "endMs": 23650,
+   "timestampMs": 23509,
+   "confidence": null
+  },
+  {
+   "text": " user",
+   "startMs": 23770,
+   "endMs": 24050,
+   "timestampMs": 23770,
+   "confidence": null
+  },
+  {
+   "text": " forty-two",
+   "startMs": 24150,
+   "endMs": 24410,
+   "timestampMs": 24150,
+   "confidence": null
+  },
+  {
+   "text": " comes",
+   "startMs": 24630,
+   "endMs": 24831,
+   "timestampMs": 24630,
+   "confidence": null
+  },
+  {
+   "text": " in,",
+   "startMs": 24931,
+   "endMs": 25071,
+   "timestampMs": 24931,
+   "confidence": null
+  },
+  {
+   "text": " and",
+   "startMs": 25511,
+   "endMs": 25591,
+   "timestampMs": 25511,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 25611,
+   "endMs": 25691,
+   "timestampMs": 25611,
+   "confidence": null
+  },
+  {
+   "text": " app",
+   "startMs": 25771,
+   "endMs": 25911,
+   "timestampMs": 25771,
+   "confidence": null
+  },
+  {
+   "text": " checks",
+   "startMs": 25931,
+   "endMs": 26212,
+   "timestampMs": 25931,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 26252,
+   "endMs": 26332,
+   "timestampMs": 26252,
+   "confidence": null
+  },
+  {
+   "text": " cache",
+   "startMs": 26352,
+   "endMs": 26612,
+   "timestampMs": 26352,
+   "confidence": null
+  },
+  {
+   "text": " first.",
+   "startMs": 26652,
+   "endMs": 26952,
+   "timestampMs": 26652,
+   "confidence": null
+  },
+  {
+   "text": " It's",
+   "startMs": 27513,
+   "endMs": 27633,
+   "timestampMs": 27513,
+   "confidence": null
+  },
+  {
+   "text": " there.",
+   "startMs": 27673,
+   "endMs": 27933,
+   "timestampMs": 27673,
+   "confidence": null
+  },
+  {
+   "text": " That's",
+   "startMs": 28435,
+   "endMs": 28655,
+   "timestampMs": 28435,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 28695,
+   "endMs": 28735,
+   "timestampMs": 28695,
+   "confidence": null
+  },
+  {
+   "text": " hit,",
+   "startMs": 28776,
+   "endMs": 29036,
+   "timestampMs": 28776,
+   "confidence": null
+  },
+  {
+   "text": " served",
+   "startMs": 29316,
+   "endMs": 29617,
+   "timestampMs": 29316,
+   "confidence": null
+  },
+  {
+   "text": " straight",
+   "startMs": 29677,
+   "endMs": 29977,
+   "timestampMs": 29677,
+   "confidence": null
+  },
+  {
+   "text": " from",
+   "startMs": 30017,
+   "endMs": 30178,
+   "timestampMs": 30017,
+   "confidence": null
+  },
+  {
+   "text": " memory.",
+   "startMs": 30218,
+   "endMs": 30598,
+   "timestampMs": 30218,
+   "confidence": null
+  },
+  {
+   "text": " Now",
+   "startMs": 31159,
+   "endMs": 31339,
+   "timestampMs": 31159,
+   "confidence": null
+  },
+  {
+   "text": " user",
+   "startMs": 31440,
+   "endMs": 31980,
+   "timestampMs": 31440,
+   "confidence": null
+  },
+  {
+   "text": " eighty-eight.",
+   "startMs": 32040,
+   "endMs": 32241,
+   "timestampMs": 32040,
+   "confidence": null
+  },
+  {
+   "text": " Not",
+   "startMs": 32721,
+   "endMs": 32922,
+   "timestampMs": 32721,
+   "confidence": null
+  },
+  {
+   "text": " cached",
+   "startMs": 33002,
+   "endMs": 33322,
+   "timestampMs": 33002,
+   "confidence": null
+  },
+  {
+   "text": " yet,",
+   "startMs": 33382,
+   "endMs": 33643,
+   "timestampMs": 33382,
+   "confidence": null
+  },
+  {
+   "text": " so",
+   "startMs": 33883,
+   "endMs": 33983,
+   "timestampMs": 33883,
+   "confidence": null
+  },
+  {
+   "text": " that's",
+   "startMs": 34023,
+   "endMs": 34204,
+   "timestampMs": 34023,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 34264,
+   "endMs": 34284,
+   "timestampMs": 34264,
+   "confidence": null
+  },
+  {
+   "text": " miss.",
+   "startMs": 34324,
+   "endMs": 34564,
+   "timestampMs": 34324,
+   "confidence": null
+  },
+  {
+   "text": " The",
+   "startMs": 35105,
+   "endMs": 35185,
+   "timestampMs": 35105,
+   "confidence": null
+  },
+  {
+   "text": " app",
+   "startMs": 35265,
+   "endMs": 35425,
+   "timestampMs": 35265,
+   "confidence": null
+  },
+  {
+   "text": " reads",
+   "startMs": 35466,
+   "endMs": 35686,
+   "timestampMs": 35466,
+   "confidence": null
+  },
+  {
+   "text": " it",
+   "startMs": 35726,
+   "endMs": 35786,
+   "timestampMs": 35726,
+   "confidence": null
+  },
+  {
+   "text": " from",
+   "startMs": 35826,
+   "endMs": 35966,
+   "timestampMs": 35826,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 36006,
+   "endMs": 36066,
+   "timestampMs": 36006,
+   "confidence": null
+  },
+  {
+   "text": " database",
+   "startMs": 36107,
+   "endMs": 36647,
+   "timestampMs": 36107,
+   "confidence": null
+  },
+  {
+   "text": " and",
+   "startMs": 36707,
+   "endMs": 36808,
+   "timestampMs": 36707,
+   "confidence": null
+  },
+  {
+   "text": " writes",
+   "startMs": 36868,
+   "endMs": 37128,
+   "timestampMs": 36868,
+   "confidence": null
+  },
+  {
+   "text": " it",
+   "startMs": 37168,
+   "endMs": 37228,
+   "timestampMs": 37168,
+   "confidence": null
+  },
+  {
+   "text": " into",
+   "startMs": 37268,
+   "endMs": 37449,
+   "timestampMs": 37268,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 37469,
+   "endMs": 37549,
+   "timestampMs": 37469,
+   "confidence": null
+  },
+  {
+   "text": " cache,",
+   "startMs": 37569,
+   "endMs": 37929,
+   "timestampMs": 37569,
+   "confidence": null
+  },
+  {
+   "text": " so",
+   "startMs": 38250,
+   "endMs": 38370,
+   "timestampMs": 38250,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 38410,
+   "endMs": 38470,
+   "timestampMs": 38410,
+   "confidence": null
+  },
+  {
+   "text": " next",
+   "startMs": 38530,
+   "endMs": 38750,
+   "timestampMs": 38530,
+   "confidence": null
+  },
+  {
+   "text": " request",
+   "startMs": 38831,
+   "endMs": 39271,
+   "timestampMs": 38831,
+   "confidence": null
+  },
+  {
+   "text": " is",
+   "startMs": 39331,
+   "endMs": 39411,
+   "timestampMs": 39331,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 39452,
+   "endMs": 39472,
+   "timestampMs": 39452,
+   "confidence": null
+  },
+  {
+   "text": " hit.",
+   "startMs": 39512,
+   "endMs": 39692,
+   "timestampMs": 39512,
+   "confidence": null
+  }
+ ]
+}

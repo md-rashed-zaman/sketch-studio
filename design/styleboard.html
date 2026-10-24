@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Night Paper styleboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* Values mirror tokens.json; this page is a static preview, not the kit. */
+  :root { --night:#14120F; --raised:#1E1B17; --grid:#2A2621; --chalk:#F4EFE6; --pencil:#B9B1A3; --graphite:#7A7266;
+          --cobalt:#5B8CFF; --cobaltText:#7EA4FF; --mint:#3FD39B; --coral:#FF6F59; --violet:#AE92FF; --amber:#FFB547; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #0b0a08; font-family: Inter, sans-serif; color: var(--chalk); }
+  .frame { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--night);
+           background-image: radial-gradient(#332E27 1.5px, transparent 1.6px); background-size: 48px 48px; }
+  .title { position: absolute; left: 96px; top: 70px; font: 700 72px 'Space Grotesk'; letter-spacing: -0.5px; }
+  .title em { font-style: normal; color: var(--coral); }
+  .mark { position: absolute; right: 96px; top: 72px; font: 700 40px 'Caveat'; color: var(--pencil); opacity: .6; }
+  .sheet { position: absolute; left: 96px; bottom: 40px; font: 500 28px 'JetBrains Mono'; color: var(--pencil); letter-spacing: 1px; }
+  .tick { position: absolute; width: 36px; height: 36px; border-color: var(--graphite); border-style: solid; }
+  .node { position: absolute; height: 140px; padding: 0 40px; white-space: nowrap; background: var(--raised); border: 3px solid var(--graphite);
+          border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .node b { font: 600 44px Inter; }
+  .node span { font: 500 30px Inter; color: var(--pencil); margin-top: 4px; }
+  .node.active { border-color: var(--cobalt); box-shadow: 0 0 12px rgba(91,140,255,.35); }
+  .free { position:absolute; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .free b { font: 600 44px Inter; }
+  .node.hot { border-color: var(--coral); box-shadow: 0 0 12px rgba(255,111,89,.35); }
+  .chip { position: absolute; font: 700 38px Inter; color: var(--night); padding: 6px 18px; border-radius: 999px; letter-spacing: .02em; }
+  .label { position: absolute; font: 500 36px Inter; color: var(--pencil); background: var(--night); padding: 2px 14px; border-radius: 999px; }
+  .packet { position: absolute; font: 700 26px 'JetBrains Mono'; color: var(--night); background: var(--cobalt);
+            padding: 2px 14px; border-radius: 999px; height: 36px; display: flex; align-items: center; }
+  .note { position: absolute; font: 700 64px Caveat; color: var(--amber); transform: rotate(-4deg); }
+  #scene > svg { position: absolute; inset: 0; }
+  .board { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 64px 96px; width: 1920px; background: var(--night); }
+  .sw { display: flex; align-items: center; gap: 20px; margin-bottom: 18px; font: 500 30px Inter; }
+  .sw i { width: 72px; height: 72px; border-radius: 16px; border: 2px solid #ffffff22; }
+  .sw small { color: var(--pencil); font: 500 24px 'JetBrains Mono'; }
+  h2 { font: 700 44px 'Space Grotesk'; margin-bottom: 28px; }
+  .ty { margin-bottom: 22px; } .ty small { display:block; color: var(--pencil); font: 500 22px 'JetBrains Mono'; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<!-- 1) A sample 1080p scene: "Scale It", step 3 -->
+<div class="frame" id="scene">
+  <div class="tick" style="left:40px;top:28px;border-width:2px 0 0 2px"></div>
+  <div class="tick" style="right:40px;top:28px;border-width:2px 2px 0 0"></div>
+  <div class="tick" style="left:40px;bottom:28px;border-width:0 0 2px 2px"></div>
+  <div class="tick" style="right:40px;bottom:28px;border-width:0 2px 2px 0"></div>
+  <div class="title">The <em>database</em> is the bottleneck</div>
+  <div class="mark">sketch lab</div>
+
+  <svg width="1920" height="1080">
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7A7266"/></marker>
+      <marker id="ahc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B8CFF"/></marker>
+      <linearGradient id="trail" x1="0" x2="1"><stop offset="0" stop-color="#5B8CFF" stop-opacity="0"/><stop offset="1" stop-color="#5B8CFF" stop-opacity=".9"/></linearGradient>
+    </defs>
+    <!-- edges attach to icon edges at icon vertical center (y=540), 24 px clearance -->
+    <path d="M272 540 H 380" stroke="#7A7266" stroke-width="4" fill="none" marker-end="url(#ah)"/>
+    <path d="M840 540 H 1000" stroke="#5B8CFF" stroke-width="4" fill="none" marker-end="url(#ahc)"/>
+    <path d="M1400 540 H 1584" stroke="#5B8CFF" stroke-width="4" fill="none" marker-end="url(#ahc)"/>
+    <path d="M1412 540 H 1450" stroke="url(#trail)" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="1456" cy="540" r="11" fill="#5B8CFF"/>
+    <circle cx="920" cy="540" r="11" fill="#5B8CFF" opacity=".55"/>
+    <!-- marker: hand-drawn loop around the database icon, label and chip, 28 px clearance -->
+    <path d="M1570 456 C 1650 418, 1782 426, 1810 500 C 1834 570, 1832 730, 1748 776 C 1660 808, 1526 790, 1504 700 C 1484 610, 1494 500, 1594 448"
+          stroke="#FFB547" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- load meter -->
+    <rect x="96" y="860" width="1728" height="18" rx="9" fill="#1E1B17" stroke="#2A2621" stroke-width="2"/>
+    <rect x="96" y="860" width="1382" height="18" rx="9" fill="#FF6F59"/>
+  </svg>
+
+  <div class="free" style="left:96px;width:200px;top:488px"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+</svg><b>Users</b></div>
+  <div class="node active" style="left:380px;top:470px;width:460px;flex-direction:row;gap:20px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#5B8CFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M16 3h5v5" />
+  <path d="M8 3H3v5" />
+  <path d="M12 22v-8.3a4 4 0 0 0-1.172-2.872L3 3" />
+  <path d="m15 9 6-6" />
+</svg><b>Load balancer</b></div>
+  <div class="node active" style="left:1000px;top:470px;width:400px;flex-direction:row;gap:20px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#5B8CFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+  <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+  <line x1="6" x2="6.01" y1="6" y2="6" />
+  <line x1="6" x2="6.01" y1="18" y2="18" />
+</svg><div style="display:flex;flex-direction:column;align-items:flex-start"><b>App servers</b><span style="margin-top:0">x 4</span></div></div>
+  <div class="free" style="left:1560px;width:200px;top:488px"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="#FF6F59" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg><b>Postgres</b></div>
+
+  <div class="chip" style="left:476px;top:634px;background:var(--mint)">2,400 req/s</div>
+  <div class="chip" style="left:1527px;top:668px;background:var(--coral)">p99 840 ms</div>
+  <div class="note" style="left:1210px;top:350px">this melts first</div>
+
+  <div style="position:absolute;left:96px;top:800px;font:500 30px 'JetBrains Mono';color:var(--pencil)">LOAD  2,400 req/s  /  capacity 3,000</div>
+  <div class="sheet">SHEET 03/07 . SCALE IT . T+02:14</div>
+</div>
+
+<!-- 2) Tokens -->
+<div class="board">
+  <div>
+    <h2>Night Paper palette</h2>
+    <div class="sw"><i style="background:#14120F"></i>paper.night <small>#14120F canvas</small></div>
+    <div class="sw"><i style="background:#1E1B17"></i>paper.raised <small>#1E1B17 node fill</small></div>
+    <div class="sw"><i style="background:#F4EFE6"></i>ink.chalk <small>#F4EFE6 text 16.3:1</small></div>
+    <div class="sw"><i style="background:#B9B1A3"></i>ink.pencil <small>#B9B1A3 secondary 8.8:1</small></div>
+    <div class="sw"><i style="background:#7A7266"></i>ink.graphite <small>#7A7266 idle strokes only</small></div>
+    <div class="sw"><i style="background:#5B8CFF"></i>signal.cobalt <small>request / active 5.9:1</small></div>
+    <div class="sw"><i style="background:#3FD39B"></i>signal.mint <small>success / hit 9.8:1</small></div>
+    <div class="sw"><i style="background:#FF6F59"></i>signal.coral <small>failure / overload 6.8:1</small></div>
+    <div class="sw"><i style="background:#AE92FF"></i>signal.violet <small>second system / AI 7.4:1</small></div>
+    <div class="sw"><i style="background:#FFB547"></i>marker.amber <small>marker layer only 10.6:1</small></div>
+  </div>
+  <div>
+    <h2>Type scale (px at 1080p)</h2>
+    <div class="ty"><small>hero 140 . Space Grotesk 700</small><div style="font:700 140px 'Space Grotesk';line-height:1">10x</div></div>
+    <div class="ty"><small>scene title 72 . Space Grotesk 700</small><div style="font:700 72px 'Space Grotesk'">Cache stampede</div></div>
+    <div class="ty"><small>node label 44 . Inter 600</small><div style="font:600 44px Inter">Load balancer</div></div>
+    <div class="ty"><small>chip 38 . Inter 700 on semantic fill</small><span class="chip" style="position:static;background:var(--mint)">HIT</span> <span class="chip" style="position:static;background:var(--coral);margin-left:16px">MISS</span></div>
+    <div class="ty"><small>code 40 . JetBrains Mono 500</small><div style="font:500 40px 'JetBrains Mono'">cache.get(key) ?? db.read(key)</div></div>
+    <div class="ty"><small>marker 60 . Caveat 700 . amber</small><div style="font:700 60px Caveat;color:var(--amber)">this melts first</div></div>
+    <div class="ty"><small>floor: nothing readable below 36 px</small></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+[project]
+name = "sketch-studio-tools"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+# torch* are listed directly so [tool.uv.sources] (which ignores transitive deps) can pin them to the CPU index.
+dependencies = ["whisperx==3.8.6", "auto-editor>=29", "torch~=2.8.0", "torchaudio~=2.8.0", "torchvision~=0.23.0"]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false
+
+# CPU-only torch: the default PyPI wheels pull ~3 GB of CUDA libs this laptop cannot use.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+torchaudio = [{ index = "pytorch-cpu" }]
+torchvision = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

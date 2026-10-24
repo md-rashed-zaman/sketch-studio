@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Icon options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--night:#14120F;--raised:#1E1B17;--chalk:#F4EFE6;--pencil:#B9B1A3;--graphite:#7A7266;--cobalt:#5B8CFF;--mint:#3FD39B;--coral:#FF6F59}
+*{box-sizing:border-box;margin:0} body{background:#0b0a08}
+.frame{position:relative;width:1920px;height:1080px;background:var(--night);background-image:radial-gradient(#332E27 1.5px,transparent 1.6px);background-size:48px 48px;font-family:Inter;color:var(--chalk);overflow:hidden}
+.tag{position:absolute;left:56px;font:500 26px 'JetBrains Mono';color:var(--pencil)}
+.node svg,.free svg{flex-shrink:0}
+.node{position:absolute;height:140px;padding:0 40px;border:3px solid var(--graphite);background:var(--raised);border-radius:20px;display:flex;align-items:center;justify-content:center;gap:20px;white-space:nowrap;font:600 44px Inter}
+.node.active{border-color:var(--cobalt);box-shadow:0 0 12px rgba(91,140,255,.35)}
+.free{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;font:600 44px Inter;white-space:nowrap}
+.chip{position:absolute;font:700 34px Inter;color:var(--night);padding:4px 16px;border-radius:999px}
+.rule{position:absolute;left:56px;right:56px;height:2px;background:#2A2621}
+svg.wires{position:absolute;inset:0}
+</style></head><body><div class="frame">
+<div class="tag" style="top:100px">A  boxes only (current)</div>
+<div class="node" style="left:330px;top:150px;width:280px">Users</div>
+<div class="node active" style="left:790px;top:150px;width:310px">App server</div>
+<div class="node" style="left:1280px;top:150px;width:260px">Cache</div>
+<div class="node" style="left:1610px;top:150px;width:254px;font-size:40px">Database</div>
+<div class="tag" style="top:420px">B  icon + label inside every node</div>
+<div class="node" style="left:150px;top:470px;width:330px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--chalk)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+</svg>Users</div>
+<div class="node active" style="left:640px;top:470px;width:420px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--cobalt)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+  <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+  <line x1="6" x2="6.01" y1="6" y2="6" />
+  <line x1="6" x2="6.01" y1="18" y2="18" />
+</svg>App server</div>
+<div class="node" style="left:1180px;top:470px;width:320px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--chalk)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+  <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+</svg>Cache</div>
+<div class="node" style="left:1560px;top:470px;width:304px;font-size:40px;gap:14px;padding:0 24px"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--chalk)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg>Database</div>
+<div class="tag" style="top:740px">C  free icons for actors + data stores, boxed services (recommended)</div>
+<div class="free" style="left:250px;top:808px"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="var(--chalk)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+</svg><span>Users</span></div>
+<div class="node active" style="left:640px;top:790px;width:420px"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--cobalt)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+  <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+  <line x1="6" x2="6.01" y1="6" y2="6" />
+  <line x1="6" x2="6.01" y1="18" y2="18" />
+</svg>App server</div>
+<div class="free" style="left:1250px;top:808px"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+  <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" />
+</svg><span>Cache</span></div>
+<div class="free" style="left:1620px;top:808px"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="var(--chalk)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg><span>Database</span></div>
+<div class="chip" style="left:1252px;top:990px;background:var(--mint)">✓ HIT</div>
+<svg class="wires" width="1920" height="1080"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7A7266"/></marker></defs><path d="M610 220 H 784" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1100 220 H 1274" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1540 220 H 1604" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M480 540 H 634" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1060 540 H 1174" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1500 540 H 1554" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M392 860 H 634" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1060 860 H 1236" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/><path d="M1396 860 H 1640" stroke="#7A7266" stroke-width="4" marker-end="url(#ah)"/></svg>
+<div class="rule" style="top:385px"></div><div class="rule" style="top:705px"></div></div></body></html>
