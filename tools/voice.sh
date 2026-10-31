@@ -45,11 +45,14 @@ inputs=(); labels=""
 for i in "${!parts[@]}"; do inputs+=(-i "${parts[$i]}"); labels+="[$i:a]"; done
 ff "${inputs[@]}" -filter_complex "${labels}concat=n=${#parts[@]}:v=0:a=1,pan=mono|c0=0.5*c0+0.5*c1" "$tmp/cut.wav"
 
-# 4. Loudness -14 LUFS (YouTube's reference), -1.5 dBTP ceiling. Raw speech peaks too high for
-#    loudnorm alone to reach the target, so: measured gain, a -3 dBFS limiter, then loudnorm to finish.
-loudness=$(ffmpeg -hide_banner -i "$tmp/cut.wav" -af ebur128=framelog=quiet -f null - 2>&1 | awk '/^ +I:/ {i=$2} END {print i}')
-gain=$(awk -v i="$loudness" 'BEGIN {print -14 - i}')
-ff -i "$tmp/cut.wav" -af "volume=${gain}dB,alimiter=limit=0.708:level=disabled:attack=2:release=40,loudnorm=I=-14:TP=-1.5:LRA=11" \
-  -ar 48000 -c:a pcm_s16le "$out"
+# 4. Loudness -14 LUFS (YouTube's reference) with true peaks at or under -1.5 dBTP. Raw speech peaks sit
+#    ~19 dB above its loudness, so a gentle compressor evens the voice, then gain into a peak limiter.
+#    The limiter lowers loudness as it works, so the gain is measured again and corrected once.
+lufs() { ffmpeg -hide_banner -i "$1" -af ebur128=framelog=quiet -f null - 2>&1 | awk '/^ +I:/ {i=$2} END {print i}'; }
+ff -i "$tmp/cut.wav" -af "volume=$(awk -v i="$(lufs "$tmp/cut.wav")" 'BEGIN {print -14 - i}')dB,acompressor=threshold=-18dB:ratio=3:attack=5:release=120" "$tmp/comp.wav"
+gain=$(awk -v i="$(lufs "$tmp/comp.wav")" 'BEGIN {print -14 - i}')
+limit() { ff -i "$tmp/comp.wav" -af "volume=${1}dB,alimiter=limit=0.75:level=disabled:attack=2:release=40" -ar 48000 -c:a pcm_s16le "$out"; }
+limit "$gain"
+limit "$(awk -v g="$gain" -v i="$(lufs "$out")" 'BEGIN {print g - 14 - i}')"
 
 echo "wrote $out ($(ffprobe -v error -show_entries format=duration -of csv=p=0 "$out")s)"

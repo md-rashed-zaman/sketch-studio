@@ -181,7 +181,8 @@ def main():
     _, cues = parse_script(script)
     for name, scene, _ in cues:
         t, end = timing["cues"][name], timing["scenes"][scene][1]
-        late = "   <- under 0.8 s before the scene ends; move the cue earlier" if end - t < 0.8 else ""
+        # the last scene runs on into the video's tail hold, so its cues can sit at the very end
+        late = "   <- under 0.8 s before the scene ends; move the cue earlier" if end - t < 0.8 and end < duration else ""
         print(f"  {t:7.2f}s  {name}{late}")
 
 
