@@ -31,3 +31,8 @@ def test_wrap_prefers_punctuation():
 
 def test_wrap_never_fails_on_long_text():
     assert "\n" in wrap("a" * 50 + " " + "b" * 30)
+
+
+def test_full_cue_breaks_after_last_comma():
+    cues = group(words("Then a post goes viral, five thousand people show up, and every page takes three seconds to load."))
+    assert [c[2] for c in cues] == ["Then a post goes viral, five thousand people show up,", "and every page takes three seconds to load."]

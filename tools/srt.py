@@ -27,22 +27,25 @@ def group(captions):
     """Splits word timings into subtitle cues: [(start_ms, end_ms, text)]."""
     cues, words = [], []
 
-    def flush():
-        if words:
-            cues.append((words[0]["startMs"], words[-1]["endMs"], " ".join(w["text"].strip() for w in words)))
-        words.clear()
+    def flush(n=None):
+        n = len(words) if n is None else n
+        if n:
+            cues.append((words[0]["startMs"], words[n - 1]["endMs"], " ".join(w["text"].strip() for w in words[:n])))
+        del words[:n]
 
     for c in captions:
         if words:
             prev = words[-1]
             text = " ".join(w["text"].strip() for w in words + [c])
-            if (
-                prev["text"].strip()[-1:] in ".?!"
-                or c["startMs"] - prev["endMs"] > PAUSE_MS
-                or not fits(text)
-                or c["endMs"] - words[0]["startMs"] > MAX_SECONDS * 1000
-            ):
+            if prev["text"].strip()[-1:] in ".?!" or c["startMs"] - prev["endMs"] > PAUSE_MS:
                 flush()
+            elif not fits(text) or c["endMs"] - words[0]["startMs"] > MAX_SECONDS * 1000:
+                # Full mid-sentence: break after the last comma so the phrase stays whole, not at the last word.
+                commas = [i for i, w in enumerate(words[:-1], 1) if i >= 3 and w["text"].strip()[-1:] in ",;:"]
+                flush(commas[-1] if commas else None)
+                if words and (not fits(" ".join(w["text"].strip() for w in words + [c]))
+                              or c["endMs"] - words[0]["startMs"] > MAX_SECONDS * 1000):
+                    flush()  # the words left after the comma still don't fit with the next one
         words.append(c)
     flush()
     return cues
