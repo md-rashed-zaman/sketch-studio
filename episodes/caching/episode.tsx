@@ -37,9 +37,13 @@ import {
 } from '../../kit';
 import timing from './timing.json';
 import stampedeShortTiming from './shorts/stampede.json';
+import cacheAsideShortTiming from './shorts/cache-aside.json';
+import ttlShortTiming from './shorts/ttl.json';
 
 export const cachingAudio = 'caching/audio/voice.wav';
 export const stampedeShortAudio = 'caching/shorts/stampede.wav';
+export const cacheAsideShortAudio = 'caching/shorts/cache-aside.wav';
+export const ttlShortAudio = 'caching/shorts/ttl.wav';
 
 // The cast (storyboard): one id, label and kind per component across every chapter, so chapters morph.
 const cast = {
@@ -896,4 +900,71 @@ export const CachingEpisode = () => (
 /** Short: the stampede chapter on its own (cut with tools/cut_short.py), vertical, with keyword captions. */
 export const CachingStampedeShort = () => (
   <Episode timing={stampedeShortTiming} audio={stampedeShortAudio} scenes={{stampede: {...stampede, intro: undefined}}} captions />
+);
+
+// Short: cache-aside, laid out like the stampede Short. Chips, edge labels and packet labels are below the
+// 52 px Shorts floor at this zoom, so the node colors (mint hit, coral miss) and the captions carry the words.
+const cacheAsidePortrait: DiagramProps = {
+  nodes: [node('app', 0, 0), node('cache', -155, 240), node('db', 155, 240)],
+  edges: [
+    {from: 'app', to: 'cache', at: 'pattern', route: 'vh'},
+    {from: 'app', to: 'db', at: 'pattern+0.1', route: 'vh'},
+  ],
+  packets: [
+    {from: 'app', to: 'cache', at: 'check-42+1.2'},
+    {from: 'cache', to: 'app', at: 'hit', tone: 'mint'},
+    {from: 'app', to: 'cache', at: 'check-88'},
+    {from: 'app', to: 'db', at: 'db-read+0.2'},
+    {from: 'db', to: 'app', at: 'db-return+0.2', tone: 'mint'},
+    {from: 'app', to: 'cache', at: 'write-back'},
+    {from: 'app', to: 'cache', at: 'next-hit'},
+    {from: 'cache', to: 'app', at: 'next-hit+1.1', tone: 'mint'},
+  ],
+  states: [
+    {target: 'cache', state: 'ok', at: 'hit'},
+    {target: 'cache', state: 'hot', at: 'miss'},
+    {target: 'cache', state: 'idle', at: 'db-read'},
+    {target: 'db', state: 'dim', at: 'db-idle+1.2'},
+    {target: 'db', state: 'idle', at: 'check-88'},
+    {target: 'db', state: 'active', at: 'db-read+0.2'},
+    {target: 'db', state: 'idle', at: 'write-back'},
+    {target: 'cache', state: 'ok', at: 'next-hit+1.1'},
+    {target: 'cache', state: 'idle', at: 'cold'},
+  ],
+  markers: [{at: 'miss', until: 'db-read', target: 'cache'}],
+};
+export const CachingCacheAsideShort = () => (
+  <Episode
+    timing={cacheAsideShortTiming}
+    audio={cacheAsideShortAudio}
+    scenes={{'cache-aside': {...cacheAside, title: 'Cache-aside', diagram: cacheAsidePortrait}}}
+    captions
+  />
+);
+
+// Short: TTL. The timeline scaled by 52/38 so its chips meet the Shorts floor; the first bar is up from the
+// first frame (no empty opening), and the joke lives in the captions.
+const TTL_SCALE = 52 / 38;
+const TtlShortHud = () => {
+  const stage = stageArea['9:16'];
+  return (
+    <div style={{position: 'absolute', left: stage.x, top: stage.y + 40, transform: `scale(${TTL_SCALE})`, transformOrigin: 'top left'}}>
+      <TtlTimeline
+        x={0}
+        y={0}
+        w={stage.w / TTL_SCALE}
+        labelW={190}
+        chipW={200}
+        axisLabel=""
+        rows={[
+          {at: 0, label: 'Entry', kind: 'entry', text: [{at: 'ttl', text: 'TTL'}, {at: 'ttl-5', text: '5 min'}], expireAt: 'expire', length: 0.85},
+          {at: 'ttl-short', label: 'Short', kind: 'refills', segments: 8, chip: {text: 'fresh', tone: 'mint'}},
+          {at: 'ttl-long', label: 'Long', kind: 'refills', segments: 2, chip: {text: 'stale', tone: 'coral'}},
+        ]}
+      />
+    </div>
+  );
+};
+export const CachingTtlShort = () => (
+  <Episode timing={ttlShortTiming} audio={ttlShortAudio} scenes={{freshness: {chapter: freshness.chapter, title: 'Time to live (TTL)', hud: TtlShortHud}}} captions />
 );

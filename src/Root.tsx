@@ -2,7 +2,16 @@ import {Composition, Folder} from 'remotion';
 import {durationFromAudio, FPS} from '../kit';
 import {KitGallery, KitGalleryVertical, galleryTiming} from './KitGallery';
 import {SampleEpisode, sampleAudio} from '../episodes/sample/episode';
-import {CachingEpisode, CachingStampedeShort, cachingAudio, stampedeShortAudio} from '../episodes/caching/episode';
+import {
+  CachingCacheAsideShort,
+  CachingEpisode,
+  CachingStampedeShort,
+  CachingTtlShort,
+  cacheAsideShortAudio,
+  cachingAudio,
+  stampedeShortAudio,
+  ttlShortAudio,
+} from '../episodes/caching/episode';
 
 export const RemotionRoot = () => (
   <>
@@ -49,6 +58,24 @@ export const RemotionRoot = () => (
         id="caching-short-stampede"
         component={CachingStampedeShort}
         calculateMetadata={durationFromAudio(stampedeShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="caching-short-cache-aside"
+        component={CachingCacheAsideShort}
+        calculateMetadata={durationFromAudio(cacheAsideShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="caching-short-ttl"
+        component={CachingTtlShort}
+        calculateMetadata={durationFromAudio(ttlShortAudio, 2)}
         durationInFrames={FPS}
         fps={FPS}
         width={1080}

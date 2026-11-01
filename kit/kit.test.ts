@@ -107,6 +107,10 @@ describe('Shorts captions', () => {
     const pages = captionPages([word('One', 0), word(' two.', 250), word(' Three', 500), word(' four', 750), word(' five', 1000), word(' six', 1250), word(' seven', 1500)]);
     expect(pages.map((p) => p.words.length)).toEqual([2, 4, 1]);
   });
+  it('breaks a page before it outgrows one line of the pill', () => {
+    const pages = captionPages([word("There's", 0), word(' no', 250), word(' perfect', 500), word(' number.', 750)]);
+    expect(pages.map((p) => p.words.map((w) => w.text.trim()).join(' '))).toEqual(["There's no perfect", 'number.']);
+  });
 });
 
 describe('iconography', () => {

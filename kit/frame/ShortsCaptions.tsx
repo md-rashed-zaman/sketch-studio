@@ -4,8 +4,11 @@ import {color, font, layout as L, type} from '../theme';
 
 type Page = {words: Caption[]; start: number; end: number};
 
-/** Groups word timings into 2-4 word pages, breaking after punctuation and at pauses. */
-export const captionPages = (captions: Caption[], maxWords = 4): Page[] => {
+/**
+ * Groups word timings into 2-4 word pages, breaking after punctuation and at pauses. A page also stays
+ * within `maxChars` so it fits the pill on one line (a second line would land on the scene title).
+ */
+export const captionPages = (captions: Caption[], maxWords = 4, maxChars = 20): Page[] => {
   const pages: Page[] = [];
   let words: Caption[] = [];
   const flush = () => {
@@ -16,7 +19,8 @@ export const captionPages = (captions: Caption[], maxWords = 4): Page[] => {
     const prev = captions[i - 1];
     const pause = prev && c.startMs - prev.endMs > 600;
     const sentenceEnd = prev && /[.,!?:;]$/.test(prev.text.trim()) && words.length >= 2;
-    if (words.length >= maxWords || pause || sentenceEnd) flush();
+    const tooWide = words.length > 0 && [...words, c].map((w) => w.text.trim()).join(' ').length > maxChars;
+    if (words.length >= maxWords || pause || sentenceEnd || tooWide) flush();
     words.push(c);
   });
   flush();
