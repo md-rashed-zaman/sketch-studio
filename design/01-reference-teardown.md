@@ -4,7 +4,7 @@
 - A frame-level analysis of 12 of the most-viewed animated explainers from ByteByteGo, ByteMonk and KodeKloud.
 - The research-backed standards experts judge explainer videos by.
 
-The System Sketch Lab design system ([02-design-system.md](02-design-system.md)) is built on this.
+The Eigenbit design system ([02-design-system.md](02-design-system.md)) is built on this.
 
 **Method:**
 - 12 videos (~90 min) downloaded at 720p for private analysis, then deleted.

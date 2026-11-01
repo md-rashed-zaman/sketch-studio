@@ -43,7 +43,7 @@ export const galleryTiming: Timing = {
 // Transitions the gallery exercises: title -> system pans (nothing shared); system -> routes morphs (App and
 // Postgres carry over); routes -> stores morphs (Cache); stores -> services and services -> data pan.
 
-const title: Chapter = {titleCard: {hero: 'Night Paper', note: 'The System Sketch Lab kit'}, chapter: 'KIT GALLERY'};
+const title: Chapter = {titleCard: {hero: 'Night Paper', note: 'The Eigenbit kit'}, chapter: 'KIT GALLERY'};
 
 // Chapter 2: the styleboard scene. Node states, counters, dot streams, a marker, the load meter.
 const LoadHud = () => {

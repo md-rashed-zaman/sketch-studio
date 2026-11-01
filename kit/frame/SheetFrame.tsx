@@ -20,7 +20,7 @@ export const Paper = () => (
   />
 );
 
-/** Drawing-sheet corner ticks and the small "sketch lab" mark. Decorative: they sit outside the safe area. */
+/** Drawing-sheet corner ticks and the small "eigenbit" channel mark. Decorative: they sit outside the safe area. */
 const SheetDecor = ({shape}: {shape: Layout}) => {
   const {width, height} = useVideoConfig();
   const tick = (style: CSSProperties) => (
@@ -45,7 +45,7 @@ const SheetDecor = ({shape}: {shape: Layout}) => {
           opacity: 0.6,
         }}
       >
-        sketch lab
+        eigenbit
       </div>
     </AbsoluteFill>
   );

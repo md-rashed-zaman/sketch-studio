@@ -1,6 +1,6 @@
-# System Sketch Lab design system: "Night Paper" (v1, 24 Oct 2026)
+# Eigenbit design system: "Night Paper" (v1, 24 Oct 2026)
 
-The visual and motion rules for every System Sketch Lab video and Short.
+The visual and motion rules for every Eigenbit video and Short.
 - **Evidence:** [01-reference-teardown.md](01-reference-teardown.md).
 - **Machine-readable tokens:** [tokens.json](tokens.json). The Sketch Studio kit should import these, never hard-code values.
 
@@ -84,7 +84,7 @@ For quotes, sources, screenshots of docs or code from the web, use a **paper car
 
 ```
 +------------------------------------------------------------------+
-| SCENE TITLE (72px)                                  [SSL mark]   |  <- top 160 px
+| SCENE TITLE (72px)                                  [eigenbit]   |  <- top 160 px
 |                                                                  |
 |                    DIAGRAM / STAGE (camera works here)           |
 |                                                                  |
@@ -108,7 +108,7 @@ For quotes, sources, screenshots of docs or code from the web, use a **paper car
   - Arrowhead 18 px.
   - Connectors never pass under a label.
   - Labels sit on a pill *beside* the line, offset 16 px. **Packets ride on the line; labels never do.** This fixes the overlapping-badge bug.
-- **Logo mark:** small "SSL" sketch mark top-right, 48 px, at 60% opacity. No facecam.
+- **Logo mark:** small "eigenbit" mark (Caveat) top-right, 48 px, at 60% opacity. No facecam.
 
 ---
 
