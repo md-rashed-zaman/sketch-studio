@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- Caching thumbnail, 1920x1080 (exported at 1280x720). Night Paper tokens via the skill's theme CSS. -->
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/home/rashed/.claude/skills/system-sketch-visuals/assets/system-sketch-theme.css">
+<style>
+  html, body { margin: 0; background: var(--ss-night); }
+  .hero { position: absolute; left: 96px; top: 70px; font: 700 196px/0.95 var(--ss-display); letter-spacing: -4px; }
+  .hero em { font-style: normal; color: var(--ss-mint); }
+  .store { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .store svg { width: 230px; height: 230px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .store b { font: 600 60px var(--ss-ui); }
+  .chip { padding: 8px 30px; border-radius: 999px; color: var(--ss-night); font: 700 64px var(--ss-ui); }
+  .db { left: 170px; top: 560px; } .db svg { stroke: var(--ss-coral); } .db .chip { background: var(--ss-coral); }
+  .cache { left: 1300px; top: 560px; } .cache svg { stroke: var(--ss-mint); } .cache .chip { background: var(--ss-mint); }
+  .vs { position: absolute; left: 640px; top: 620px; width: 560px; height: 120px; }
+  .note { position: absolute; left: 1330px; top: 300px; color: var(--ss-amber); font: 700 92px var(--ss-marker); transform: rotate(-5deg); }
+</style>
+</head>
+<body>
+<div class="ss-stage">
+  <div class="hero">WHY IT'S<br><em>FAST</em></div>
+
+  <div class="store db">
+    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+    <b>Database</b>
+    <span class="chip">✕ 3,000 ms</span>
+  </div>
+
+  <svg class="vs" viewBox="0 0 560 120">
+    <path d="M10 60 H530" stroke="#7A7266" stroke-width="6"/>
+    <path d="M505 40 L535 60 L505 80" fill="none" stroke="#7A7266" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="store cache">
+    <svg viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+    <b>Cache</b>
+    <span class="chip">✓ 8 ms</span>
+  </div>
+
+  <!-- the one marker: a hand-drawn arrow from the note down to the cache -->
+  <span class="note">375x faster</span>
+  <svg style="position:absolute;left:0;top:0" width="1920" height="1080">
+    <path d="M1640 420 C 1700 470, 1690 520, 1640 575" fill="none" stroke="#FFB547" stroke-width="7" stroke-linecap="round"/>
+    <path d="M1612 548 L1640 578 L1668 556" fill="none" stroke="#FFB547" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+</body>
+</html>
