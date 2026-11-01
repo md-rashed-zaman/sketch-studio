@@ -2,7 +2,7 @@ import {Composition, Folder} from 'remotion';
 import {durationFromAudio, FPS} from '../kit';
 import {KitGallery, KitGalleryVertical, galleryTiming} from './KitGallery';
 import {SampleEpisode, sampleAudio} from '../episodes/sample/episode';
-import {CachingEpisode, cachingAudio} from '../episodes/caching/episode';
+import {CachingEpisode, CachingStampedeShort, cachingAudio, stampedeShortAudio} from '../episodes/caching/episode';
 
 export const RemotionRoot = () => (
   <>
@@ -42,6 +42,17 @@ export const RemotionRoot = () => (
         fps={FPS}
         width={1920}
         height={1080}
+      />
+    </Folder>
+    <Folder name="Shorts">
+      <Composition
+        id="caching-short-stampede"
+        component={CachingStampedeShort}
+        calculateMetadata={durationFromAudio(stampedeShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
       />
     </Folder>
   </>

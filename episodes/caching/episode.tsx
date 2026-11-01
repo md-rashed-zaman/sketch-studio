@@ -26,14 +26,20 @@ import {
   TtlTimeline,
   type,
   useFontsReady,
+  useLayout,
   useSceneTime,
+  stageArea,
   type At,
   type Chapter,
   type DiagramNode,
+  type DiagramProps,
+  type Layout,
 } from '../../kit';
 import timing from './timing.json';
+import stampedeShortTiming from './shorts/stampede.json';
 
 export const cachingAudio = 'caching/audio/voice.wav';
+export const stampedeShortAudio = 'caching/shorts/stampede.wav';
 
 // The cast (storyboard): one id, label and kind per component across every chapter, so chapters morph.
 const cast = {
@@ -658,11 +664,44 @@ const TtlKey = ({start, end, refreshAt}: {start: At; end: At; refreshAt?: At}) =
   );
 };
 const fixes = {x: 96, y: 750, w: 860};
+const fixRows = [
+  {text: 'One request rebuilds', at: 'lock', done: 'lock+0.4'},
+  {text: 'Random jitter on TTLs', at: 'jitter', done: 'jitter+0.4'},
+  {text: 'Refresh before expiry', at: 'early', done: 'early+0.4'},
+];
+// Shorts: the checklist's 40 px rows scaled up to the 52 px Shorts floor.
+const SHORTS_LIST_SCALE = 1.3;
+const ShortsFixes = () => {
+  const stage = stageArea['9:16'];
+  return (
+    <div style={{position: 'absolute', left: stage.x, top: stage.y + 40, transform: `scale(${SHORTS_LIST_SCALE})`, transformOrigin: 'top left'}}>
+      <Checklist x={0} y={0} w={stage.w / SHORTS_LIST_SCALE} title="The fixes" titleAt="lock" rows={fixRows} />
+    </div>
+  );
+};
+// Shorts: app above, cache and database below (close enough for 52 px labels, so no TTL card; the captions
+// say it); the map leaves at "lock" and the fixes list takes the stage.
+const stampedePortrait: DiagramProps = {
+  nodes: [node('app', 0, 0, 0, 'lock'), node('cache', -155, 240, 0, 'lock'), node('db', 155, 240, 0, 'lock')],
+  edges: [
+    {from: 'app', to: 'cache', at: 0, route: 'vh', rate: [{at: 'all-hits', value: 12}, {at: 'expires', value: 0}, {at: 'herd', value: 12}, {at: 'db-flood', value: 0}]},
+    {from: 'app', to: 'db', at: 0, route: 'vh', rate: [{at: 'db-flood', value: 14}, {at: 'down', value: 0}]},
+  ],
+  states: [
+    {target: 'db', state: 'dim', at: 'all-hits'},
+    {target: 'app>cache', state: 'ok', at: 'all-hits'},
+    {target: 'app>cache', state: 'hot', at: 'herd'},
+    {target: 'app>db', state: 'hot', at: 'db-flood'},
+    {target: 'db', state: 'hot', at: 'db-flood'},
+    {target: 'app', state: 'hot', at: 'down'},
+  ],
+  markers: [{at: 'down+2', until: 'lock', target: 'db'}], // no note: the title and captions already say it,
+};
 const stampede: Chapter = {
   chapter: 'CACHE STAMPEDE',
   title: 'Cache stampede',
   intro: {hero: 'The bug'},
-  hud: () => (
+  hud: () => useLayout() === '9:16' ? <ShortsFixes /> : (
     <>
       <LoadMeter
         at="all-hits"
@@ -674,14 +713,7 @@ const stampede: Chapter = {
         ]}
         style={{position: 'absolute', left: 96, width: 1728, top: 830}}
       />
-      <Checklist
-        {...fixes}
-        rows={[
-          {text: 'One request rebuilds', at: 'lock', done: 'lock+0.4'},
-          {text: 'Random jitter on TTLs', at: 'jitter', done: 'jitter+0.4'},
-          {text: 'Refresh before expiry', at: 'early', done: 'early+0.4'},
-        ]}
-      />
+      <Checklist {...fixes} rows={fixRows} />
       <TtlTimeline
         x={1000}
         y={760}
@@ -698,7 +730,7 @@ const stampede: Chapter = {
       />
     </>
   ),
-  diagram: {
+  diagram: (layout: Layout) => layout === '9:16' ? stampedePortrait : {
     // Down to 800: the meter (until lock) sits below it, and once the loop and DOWN chip are gone the
     // map is short enough to stay above the fixes panel.
     area: {x: 96, y: 160, w: 1728, h: 640},
@@ -859,4 +891,9 @@ export const CachingEpisode = () => (
       recap,
     }}
   />
+);
+
+/** Short: the stampede chapter on its own (cut with tools/cut_short.py), vertical, with keyword captions. */
+export const CachingStampedeShort = () => (
+  <Episode timing={stampedeShortTiming} audio={stampedeShortAudio} scenes={{stampede: {...stampede, intro: undefined}}} captions />
 );
