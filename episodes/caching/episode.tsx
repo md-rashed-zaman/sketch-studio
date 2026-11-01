@@ -406,11 +406,11 @@ const ReadThroughHud = () => {
         <Badge text="Amazon DAX (DynamoDB)" tone="neutral" at="examples-rt+0.3" until="one-loader" />
       </div>
       <Funnel />
-      <Marker at="one-loader+1.4" until="control" kind="circle" box={{x: loaderCard.x, y: loaderCard.y, w: loaderCard.w, h: 196}} note="one rule for all" side="below" />
+      <Marker at="one-loader+1.4" until="control" kind="circle" box={{x: loaderCard.x, y: loaderCard.y + 28, w: loaderCard.w, h: 168}} note="one rule for all" side="below" />
       <div style={{position: 'absolute', inset: 0, opacity: rightCode}}>
         <CodeCard
           x={1000}
-          y={775}
+          y={800}
           w={560}
           title="your app (read-through)"
           lines={[{text: 'user = cache.get(id)', at: 'code-through', highlight: {at: 'code-through', until: 'loader-move', tone: 'mint'}}]}
