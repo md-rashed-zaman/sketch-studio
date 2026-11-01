@@ -3,13 +3,15 @@
 Files:
 - Video: `out/caching-final.mp4` (1080p30)
 - Captions: `out/captions.srt` (upload under Subtitles, language English)
-- Thumbnail: `out/thumbnail.png` (1280x720)
+- Thumbnail: `out/thumbnail.png` (1280x720, "It was the cache.")
+- Test & compare variant: `out/thumbnail-test-b.png` ("Why did it spike?")
+- Thumbnail sources: `thumbnail.py` writes `thumbnail.html` and `thumbnail-test-b.html`
 
-## Title (pick one, A is recommended)
+## Title
 
-A. How Caching Actually Works (and the Bug That Takes Sites Down)
-B. Caching Explained: Hits, Misses, TTLs and the Thundering Herd
-C. Why Every Fast App Uses a Cache
+How Caching Actually Works (and How It Takes Sites Down)
+
+Backup if CTR stays under 4% after about 2 weeks: How One Expired Cache Key Takes Down a Website
 
 ## Description
 

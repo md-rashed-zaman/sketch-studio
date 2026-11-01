@@ -1,51 +1,20 @@
-<!doctype html>
-<!-- Caching thumbnail, 1920x1080 (exported at 1280x720). Night Paper tokens via the skill's theme CSS. -->
-<html>
-<head>
-<meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500;600;700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/home/rashed/.claude/skills/system-sketch-visuals/assets/system-sketch-theme.css">
-<style>
-  html, body { margin: 0; background: var(--ss-night); }
-  .hero { position: absolute; left: 96px; top: 70px; font: 700 196px/0.95 var(--ss-display); letter-spacing: -4px; }
-  .hero em { font-style: normal; color: var(--ss-mint); }
-  .store { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 18px; }
-  .store svg { width: 230px; height: 230px; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-  .store b { font: 600 60px var(--ss-ui); }
-  .chip { padding: 8px 30px; border-radius: 999px; color: var(--ss-night); font: 700 64px var(--ss-ui); }
-  .db { left: 170px; top: 560px; } .db svg { stroke: var(--ss-coral); } .db .chip { background: var(--ss-coral); }
-  .cache { left: 1300px; top: 560px; } .cache svg { stroke: var(--ss-mint); } .cache .chip { background: var(--ss-mint); }
-  .vs { position: absolute; left: 640px; top: 620px; width: 560px; height: 120px; }
-  .note { position: absolute; left: 1330px; top: 300px; color: var(--ss-amber); font: 700 92px var(--ss-marker); transform: rotate(-5deg); }
-</style>
-</head>
-<body>
-<div class="ss-stage">
-  <div class="hero">WHY IT'S<br><em>FAST</em></div>
-
-  <div class="store db">
-    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
-    <b>Database</b>
-    <span class="chip">✕ 3,000 ms</span>
-  </div>
-
-  <svg class="vs" viewBox="0 0 560 120">
-    <path d="M10 60 H530" stroke="#7A7266" stroke-width="6"/>
-    <path d="M505 40 L535 60 L505 80" fill="none" stroke="#7A7266" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-
-  <div class="store cache">
-    <svg viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
-    <b>Cache</b>
-    <span class="chip">✓ 8 ms</span>
-  </div>
-
-  <!-- the one marker: a hand-drawn arrow from the note down to the cache -->
-  <span class="note">375x faster</span>
-  <svg style="position:absolute;left:0;top:0" width="1920" height="1080">
-    <path d="M1640 420 C 1700 470, 1690 520, 1640 575" fill="none" stroke="#FFB547" stroke-width="7" stroke-linecap="round"/>
-    <path d="M1612 548 L1640 578 L1668 556" fill="none" stroke="#FFB547" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
-</body>
-</html>
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@500;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>html,body{margin:0} .st{position:relative;width:1920px;height:1080px;overflow:hidden;background:#14120F} .a{position:absolute}
+.hl{font:700 178px/.9 "Space Grotesk";letter-spacing:-5px;color:#F4EFE6;white-space:nowrap}</style></head><body><div class="st">
+<div class="a" style="left:30px;top:250px;width:1860px;height:800px;background:#1f232a;border:3px solid #39404a;border-radius:14px"></div>
+<div class="a" style="left:80px;top:276px;font:600 48px Inter;color:#c9c9d6">Page load time</div>
+<div class="a" style="left:1440px;top:268px;padding:8px 26px;border-radius:10px;background:#f2495c;color:#fff;font:800 44px Inter">⚠ SITE DOWN</div>
+<svg class="a" style="left:0;top:0" width="1920" height="1080">
+  <path d="M140 430 H1840 M140 990 H1840" stroke="#2c3235" stroke-width="3"/>
+  
+  <path d="M1050 923 L1075 900 L1088 600 L1100 440 L1120 420 L1146 448 L1172 437 L1198 402 L1224 419 L1250 449 L1276 401 L1302 452 L1328 455 L1354 417 L1380 430 L1406 438 L1432 446 L1458 458 L1484 456 L1510 424 L1536 445 L1562 450 L1588 458 L1614 427 L1640 425 L1666 446 L1692 451 L1718 436 L1744 428 L1770 459 L1796 408 L1822 456 L1822 990 L1050 990 Z" fill="#f2495c" opacity=".5"/>
+  <path d="M140 925 L166 936 L192 935 L218 922 L244 929 L270 937 L296 933 L322 938 L348 936 L374 920 L400 937 L426 918 L452 933 L478 926 L504 935 L530 925 L556 924 L582 940 L608 933 L634 935 L660 935 L686 933 L712 930 L738 938 L764 922 L790 925 L816 938 L842 922 L868 934 L894 930 L920 941 L946 918 L972 939 L998 942 L1024 920 L1050 923" fill="none" stroke="#73bf69" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M1050 923 L1075 900 L1088 600 L1100 440 L1120 420 L1146 448 L1172 437 L1198 402 L1224 419 L1250 449 L1276 401 L1302 452 L1328 455 L1354 417 L1380 430 L1406 438 L1432 446 L1458 458 L1484 456 L1510 424 L1536 445 L1562 450 L1588 458 L1614 427 L1640 425 L1666 446 L1692 451 L1718 436 L1744 428 L1770 459 L1796 408 L1822 456" fill="none" stroke="#ff5a6e" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M990 640 C 950 500, 1010 380, 1110 375 C 1220 370, 1250 540, 1215 650 C 1185 750, 1060 770, 1010 700 C 984 664, 970 610, 972 530" fill="none" stroke="#FFB547" stroke-width="13" stroke-linecap="round"/>
+</svg>
+<div class="a" style="left:160px;top:790px;padding:6px 26px;border-radius:999px;background:#3FD39B;color:#14120F;font:800 64px Inter">✓ 8 ms</div>
+<div class="a" style="left:1500px;top:500px;padding:6px 26px;border-radius:999px;background:#FF6F59;color:#14120F;font:800 64px Inter">✕ 3 s</div>
+<div class="a" style="left:330px;top:560px;font:700 96px Caveat;color:#FFB547;transform:rotate(-6deg);white-space:nowrap"></div>
+<div class="a hl" style="left:50px;top:40px">IT WAS THE <span style="color:#FFB547">CACHE</span>.</div>
+</div></body></html>

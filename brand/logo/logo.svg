@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Prismbit logo: a hand-drawn prism splits one white beam into the 4 video colors (complex in, clear parts out). -->
+  <rect width="100" height="100" fill="#14120F"/>
+  <g transform="translate(2 4.5)">
+  <path d="M6 59 L31.5 48" stroke="#F4EFE6" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M31.5 48 L56.4 50" stroke="#F4EFE6" stroke-width="2.6" opacity="0.45" stroke-linecap="round"/>
+  <g stroke="#F4EFE6" stroke-width="5" stroke-linecap="round" fill="none">
+    <!-- the right face starts exactly at the apex so the two strokes don't knot; the left one flicks past it -->
+    <path d="M43.2 22.7 L67 72"/><path d="M72 68 L15 68"/><path d="M19 73 L45 19"/>
+  </g>
+  <g stroke-width="5" stroke-linecap="round">
+    <path d="M53.5 44 L86 33" stroke="#FF6F59"/><path d="M55.4 48 L90 45" stroke="#3FD39B"/>
+    <path d="M57.4 52 L89 57" stroke="#5B8CFF"/><path d="M59.3 56 L84 68" stroke="#AE92FF"/>
+  </g>
+  </g>
+</svg>
