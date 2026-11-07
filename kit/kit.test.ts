@@ -8,6 +8,7 @@ import {victimOf} from './explain/eviction';
 import {codeRowTops, typedText} from './explain/CodeCard';
 import {captionPages} from './frame/ShortsCaptions';
 import {markerLayout} from './frame/Marker';
+import {drawnDashes} from './diagram/SystemDiagram';
 
 const clock = {cues: {app: 12.5}, scene: {id: 's', index: 0, count: 1, start: 10, duration: 20}};
 
@@ -140,6 +141,16 @@ describe('chapter transitions', () => {
     const {shared, sharedEdges} = carried(prev, next);
     expect([...shared]).toEqual(['app', 'db']);
     expect([...sharedEdges]).toEqual(['app>db']);
+  });
+  it('draws a dashed connector on as dashes, ending in the full pattern', () => {
+    expect(drawnDashes(0, 100, [14, 10])).toBe('0 100');
+    expect(drawnDashes(30, 100, [14, 10])).toBe('14 10 6 100'); // 30 px drawn: a dash, a gap, 6 px of dash
+    expect(drawnDashes(48, 48, [14, 10])).toBe('14 10 14 58');
+  });
+  it('does not carry a connector whose route shape changes', () => {
+    const nodes = [{id: 'app', label: 'A', x: 0, y: 0}, {id: 'db', label: 'D', x: 0, y: 0}];
+    const {sharedEdges} = carried({nodes, edges: [{from: 'app', to: 'db', route: 'hv'}]}, {nodes, edges: [{from: 'app', to: 'db', route: 'vh'}]});
+    expect([...sharedEdges]).toEqual([]);
   });
 });
 

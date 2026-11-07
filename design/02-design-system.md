@@ -1,15 +1,17 @@
-# Eigenbit design system: "Night Paper" (v1, 24 Oct 2026)
+# Eigenbit design system: "Day Paper" (v2, 6 Nov 2026)
+
+v2 swaps the v1 "Night Paper" warm-dark canvas for warm light paper (the dark canvas read as gloomy). Only the colors changed; every role, rule and size is the same.
 
 The visual and motion rules for every Eigenbit video and Short.
 - **Evidence:** [01-reference-teardown.md](01-reference-teardown.md).
 - **Machine-readable tokens:** [tokens.json](tokens.json). The Sketch Studio kit should import these, never hard-code values.
 
 **The idea in one line:**
-> **An engineer's notebook at night: precise diagrams on warm dark paper, with a hand-drawn marker layer that points at what matters, exactly when it is said.**
+> **An engineer's notebook: precise diagrams on warm cream paper, with a hand-drawn marker layer that points at what matters, exactly when it is said.**
 
 **What makes it ours:**
-- **Warm-dark "Night Paper" canvas.** Competitors use cold charcoal, black or navy.
-- **The marker annotation layer:** hand-drawn circles, underlines and arrows in amber.
+- **Warm cream "Day Paper" canvas.** Competitors use cold white, charcoal, black or navy; cream stands out in YouTube's dark-mode feed.
+- **The marker annotation layer:** hand-drawn circles, underlines and arrows: an orange pen on Day Paper (amber pen on Night Paper).
 - **Numbers that force each step:** live load, latency and cost counters.
 - **The sheet frame:** an engineering-drawing title block that doubles as chapter progress.
 - **Five semantic colors** that mean the same thing in every video.
@@ -22,12 +24,12 @@ The visual and motion rules for every Eigenbit video and Short.
 
 | Token | Hex | Use | Contrast on canvas |
 |---|---|---|---|
-| `paper.night` | `#14120F` | Canvas (warm near-black, flat, never a gradient) | - |
-| `paper.raised` | `#1E1B17` | Node / card fill | - |
-| `paper.grid` | `#2A2621` | Dot grid (3 px dots every 48 px) | decorative |
-| `ink.chalk` | `#F4EFE6` | Primary text, active strokes | 16.3:1 |
-| `ink.pencil` | `#B9B1A3` | Secondary text, idle labels | 8.8:1 |
-| `ink.graphite` | `#7A7266` | Idle strokes and borders (**never text**) | 3.9:1 |
+| `paper.canvas` | `#F5F0E6` | Canvas (warm cream, flat, never a gradient) | - |
+| `paper.raised` | `#FFFDF9` | Node / card fill | - |
+| `paper.grid` | `#DED5C5` | Dot grid (3 px dots every 48 px) | decorative |
+| `ink.chalk` | `#1F1B16` | Primary text, active strokes | 15.1:1 |
+| `ink.pencil` | `#5A5248` | Secondary text, idle labels | 6.8:1 |
+| `ink.graphite` | `#958C7F` | Idle strokes and borders (**never text**) | 2.5:1 |
 
 ### 1.2 Semantic colors
 
@@ -35,21 +37,26 @@ These five colors are the whole palette. Each color means a **role in the story*
 
 | Token | Hex | Meaning (always) | Contrast |
 |---|---|---|---|
-| `signal.cobalt` | `#5B8CFF` (text: `#7EA4FF`) | **Request / active path / "this is what we're looking at"** | 5.9 (7.7) |
-| `signal.mint` | `#3FD39B` | **Success / response / hit / healthy** | 9.8 |
-| `signal.coral` | `#FF6F59` | **Failure / overload / miss / risk** | 6.8 |
-| `signal.violet` | `#AE92FF` | **Second system / AI or agent / async** (only when two subsystems must be told apart) | 7.4 |
-| `marker.amber` | `#FFB547` | **The marker layer only:** hand-drawn emphasis, never component fills | 10.6 |
+| `signal.cobalt` | `#2E5FE6` (text: `#2551CF`) | **Request / active path / "this is what we're looking at"** | 4.7 (5.9) |
+| `signal.mint` | `#0C9B6A` | **Success / response / hit / healthy** | 3.1 |
+| `signal.coral` | `#E14B34` | **Failure / overload / miss / risk** | 3.5 |
+| `signal.violet` | `#7650DE` | **Second system / AI or agent / async** (only when two subsystems must be told apart) | 4.7 |
+| `marker.stroke` / `marker.text` | `#F08C00` / `#A85A00` | **The marker layer only:** a 7 px orange pen stroke, notes handwritten in a darker orange. Never component fills. Pushed toward amber (hue 35) so a circle around a coral node (hue 8) stays a separate color; the pen's rough line also sets it apart from crisp borders | stroke 2.2:1, note 4.5:1 |
 
 **Rules:**
 1. **Idle components are neutral** (`raised` fill, `graphite` stroke, `chalk` label). Color appears only when something *happens*. This is the signaling principle: color draws the eye because it is rare.
 2. **One emphasis at a time:** a colored state, or a marker annotation, or a camera push. Never all three.
 3. **Never color alone.** Mint/coral pairs always get an icon (check / cross) or a word (HIT / MISS), because they can look alike to color-blind viewers.
-4. **Filled chips** (tags such as `HIT`, `200 OK`, `p99 840ms`) use the semantic color as the fill with `paper.night` text (contrast 6-10:1).
-5. **Glow:** only a soft 12 px outer glow at 35% on the *active* element, so it looks lit on dark paper. Never glow everything (ByteMonk overuses it, and it bands on YouTube).
+4. **Filled chips** (tags such as `HIT`, `200 OK`, `p99 840ms`) use the semantic color as the fill with `ink.onSignal` (white) text (contrast 3.5-5.4:1, so filled chips stay 38 px bold or larger).
+5. **A colored state must read at a glance.** On Day Paper a state (active, hot, ok) tints the node fill with its color at 12% and thickens the border from 3 to 5 px; a free-standing icon gets the same tint as a rounded square behind it. On Night Paper the same states glow instead (12 px, 35%). Never tint or glow an idle node.
+6. **Secondary text weight:** pencil text (connector labels, subs, notes, meter labels) is Inter 600 on Day Paper, 500 on Night Paper, because dark ink on light paper reads thinner.
 
-### 1.3 Light inserts
-For quotes, sources, screenshots of docs or code from the web, use a **paper card** (`#F4EFE6` fill, `#14120F` text, 16 px radius, slight 2° tilt). It reads like a page pinned into the notebook, the same idea as ByteMonk's white pills but on-brand.
+### 1.3 Themes
+
+`tokens.json` keeps both palettes under `themes` and picks one with `theme` (`day` now, `night` saved for later). Each theme carries its colors plus how it renders emphasis (`emphasis.mode` tint or glow), icon stroke widths, marker stroke and the secondary text weight. Switching is one word, then a full contact-sheet QA.
+
+### 1.4 Inserts
+For quotes, sources, screenshots of docs or code from the web, use an **ink card** (`paper.card` `#262320` fill, `paper.canvas` text, 16 px radius, slight 2° tilt). It reads like a dark index card pinned onto the page.
 
 ---
 
@@ -61,10 +68,10 @@ For quotes, sources, screenshots of docs or code from the web, use a **paper car
 | Scene title | Space Grotesk | 700 | 72 px | Top-left in safe area; 2-6 words |
 | Node label | **Inter** | 600 | **44 px** (minimum 40) | 1-3 words; sentence case |
 | Chip / tag | Inter | 700 | 36-40 px, letter-spacing +2% | UPPERCASE allowed for status words only (HIT, MISS, 200) |
-| Connector label | Inter | 500 | 36 px | On a `paper.night` pill so it never crosses a stroke |
+| Connector label | Inter | 500 | 36 px | On a `paper.canvas` pill so it never crosses a stroke |
 | Secondary note | Inter | 500 | 36 px, `ink.pencil` | Maximum 6 words |
 | Code | **JetBrains Mono** | 500 | **40 px**, line height 1.45 | Maximum 14 lines x 48 columns visible; highlight lines, don't scroll |
-| Marker annotation | **Caveat** | 700 | 56-64 px, `marker.amber` | Hand-written words, 1-3 at a time; the only handwriting allowed |
+| Marker annotation | **Caveat** | 700 | 56-64 px, `marker.text` | Hand-written words, 1-3 at a time; the only handwriting allowed |
 | Sheet frame | JetBrains Mono | 500 | 28 px, `ink.pencil` | The only text allowed under 36 px (decorative, not required reading) |
 
 **Rules:**
@@ -129,7 +136,7 @@ Comparison of the three options: [icon-options.png](icon-options.png).
 | Rule | Value |
 |---|---|
 | Library | **Lucide** (ISC licence, ~1,500 consistent outline icons, React package `lucide-react`). One library only, never mixed. |
-| Style | Outline only. Rendered stroke 3-5 px at 1080p, to match node strokes (Lucide `strokeWidth` ~1.25 at 56 px, ~1.1 at 104 px). Round caps and joins. |
+| Style | Outline only. Rendered stroke 3-6 px at 1080p, to match node strokes and label weight (theme `iconStroke`: Day 1.5 at 56 px, 1.3 at 104 px; Night 1.25 and 1.1). Round caps and joins. |
 | Sizes at 1080p | 56 px inside a node (left of the label, 20 px gap). 104 px free-standing (label 44 px, 6 px below). Never under 48 px. |
 | Color | `ink.chalk` when idle. Takes the node's semantic state color when active (cobalt / mint / coral). Never multicolor. |
 | Label | Always present (2-3 words). An icon alone is ambiguous: a "layers" glyph could mean cache, stack or abstraction. |
@@ -234,7 +241,7 @@ Comparison of the three options: [icon-options.png](icon-options.png).
 2. The new label types on (`t.labelType`, 400 ms).
 3. A 2 px `ink.graphite` pencil underline draws beneath it (`t.labelUnderline`, 500 ms).
 
-Never amber, never across the diagram.
+Never the marker color, never across the diagram.
 
 **Timing:** start the transition on the chapter's boundary cue so it plays in the natural pause between chapters; it must not cover narration of a new idea. Hold the settled new layout for at least 1 s before the first new cue.
 
@@ -245,7 +252,7 @@ Never amber, never across the diagram.
 ## 5. Signature devices
 
 ### 5.1 The marker layer
-- **What it is:** amber hand-drawn strokes drawn **on the cue word**, via `@remotion/rough-notation` or rough.js-style paths:
+- **What it is:** hand-drawn marker strokes (`marker.stroke`) drawn **on the cue word**, via `@remotion/rough-notation` or rough.js-style paths:
   - circle, curved arrow, cross-out, bracket
   - underline **only** directly under a short word or number on screen (3 words or fewer) that *is* the point
   - plus an optional 1-3 word handwritten note in Caveat
@@ -302,11 +309,11 @@ Never amber, never across the diagram.
   - Same tokens; diagrams re-laid out vertically (top to bottom), not cropped.
   - Labels at least 52 px.
   - Critical content inside the central 900x1300 px. Keep the bottom 35% and right 15% clear of text.
-  - **Burned keyword captions:** 2-4 words, Inter 700 at 64 px, chalk on a `paper.night` pill. Placed at about 22% from the top, *above* the diagram, never over the bottom UI. The active word is in amber.
+  - **Burned keyword captions:** 2-4 words, Inter 700 at 64 px, chalk on a `paper.canvas` pill. Placed at about 22% from the top, *above* the diagram, never over the bottom UI. The active word is in `marker.text`.
 - **Thumbnails:**
   - Night-paper background; one diagram fragment at large scale with **one** coral or mint state.
   - 2-4 words in Space Grotesk 700, at least 160 px tall at 1280x720.
-  - One amber marker circle or arrow on the object.
+  - One marker circle or arrow on the object.
   - No faces, no stock photos.
   - The same layout family every time, so the channel is recognizable in the feed.
 
@@ -343,7 +350,7 @@ Never amber, never across the diagram.
 
 | Was | Now |
 |---|---|
-| Light warm-paper canvas, small diagrams with lots of empty space | Night Paper canvas; a camera-driven canvas fills the frame; focus shots for detail |
+| Light warm-paper canvas, small diagrams with lots of empty space | Night Paper canvas in v1, Day Paper in v2 (light again, but with big diagrams); a camera-driven canvas fills the frame; focus shots for detail |
 | Labels ~20-28 px | 44 px node labels, 36 px floor |
 | Packet badges sitting on top of node borders | Packets ride the line; labels sit on offset pills; collision check in QA |
 | Burned-in mid-phrase captions | SRT for long-form; keyword captions only in Shorts |

@@ -4,10 +4,12 @@ import tokens from '../design/tokens.json';
 
 export {tokens};
 
-const {paper, ink, signal, marker} = tokens.color;
+/** The active palette and its rendering settings ('day' or 'night', picked by `theme` in tokens.json). */
+export const theme = tokens.themes[tokens.theme as keyof typeof tokens.themes];
+const {paper, ink, signal, marker} = theme;
 
 export const color = {
-  night: paper.night,
+  canvas: paper.canvas,
   raised: paper.raised,
   grid: paper.grid,
   card: paper.card,
@@ -20,13 +22,15 @@ export const color = {
   mint: signal.mint,
   coral: signal.coral,
   violet: signal.violet,
-  amber: marker.amber,
+  amber: marker.stroke,
+  /** Marker notes: the marker hue, darker where the canvas needs it for contrast. */
+  amberText: marker.text,
 } as const;
 
 /** The semantic colors. cobalt = request/active, mint = success, coral = failure, violet = second system. */
 export type Tone = 'cobalt' | 'mint' | 'coral' | 'violet';
 export const tone: Record<Tone, string> = {cobalt: signal.cobalt, mint: signal.mint, coral: signal.coral, violet: signal.violet};
-/** Tone colors for text on the canvas (cobalt has a lighter text variant for contrast). */
+/** Tone colors for text on the canvas (cobalt has a darker text variant for contrast). */
 export const toneText: Record<Tone, string> = {...tone, cobalt: signal.cobaltText};
 
 export const font = {
@@ -57,6 +61,9 @@ export const alpha = (hex: string, a: number) =>
     .toString(16)
     .padStart(2, '0')}`;
 
-/** The one allowed glow: soft, on the active element only. */
+/** The one allowed glow: soft, on the active element only (night theme; day paper tints instead). */
 export const glow = (hex: string, strength = 1) =>
-  `drop-shadow(0 0 ${tokens.color.glow.radiusPx}px ${alpha(hex, tokens.color.glow.opacity * strength)})`;
+  theme.emphasis.mode === 'glow' ? `drop-shadow(0 0 ${theme.emphasis.glowRadiusPx}px ${alpha(hex, theme.emphasis.glowOpacity * strength)})` : undefined;
+
+/** Weight of secondary (pencil) UI text: dark ink on light paper reads thinner, so day paper uses 600. */
+export const secondaryWeight = theme.secondaryWeight;

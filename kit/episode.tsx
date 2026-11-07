@@ -184,7 +184,7 @@ export const Episode = ({
   };
 
   return (
-    <AbsoluteFill style={{background: color.night}}>
+    <AbsoluteFill style={{background: color.canvas}}>
       {ranges.map(([id], i) => {
         const until = i === ranges.length - 1 ? durationInFrames : froms[i + 1];
         const scene = (

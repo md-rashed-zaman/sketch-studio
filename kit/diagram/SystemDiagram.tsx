@@ -2,7 +2,7 @@ import type {ReactNode} from 'react';
 import {AbsoluteFill, interpolate, interpolateColors, useVideoConfig} from 'remotion';
 import {evolvePath, getLength, getPointAtLength} from '@remotion/paths';
 import {measureText} from '@remotion/layout-utils';
-import {color, dur, ease, font, glow, layout as L, tokens, tone as toneColor, type, type Tone} from '../theme';
+import {color, dur, ease, font, glow, layout as L, secondaryWeight, theme, tokens, tone as toneColor, type, type Tone} from '../theme';
 import {useFontsReady} from '../fonts';
 import {progressAt, sceneTimeAt, useCues, useSceneTime, type At, type SceneTime} from '../motion/cues';
 import {carried, morphTiming, useChapterLink, useGhost, type ChapterLink} from '../frame/transition';
@@ -138,7 +138,10 @@ export type DiagramProps = {
   layout?: Layout;
   /** Draw the diagram in this part of the frame (screen px) instead of the whole stage. */
   area?: Rect;
-  /** Frame the overview as if it were this scene time already (a morph frames the layout it glides into). */
+  /**
+   * Frame the overview as if it were this scene time already (a morph frames the layout it glides into).
+   * Infinity frames the whole chapter, every node and chip, so the camera never moves.
+   */
   frameFrom?: number;
 };
 
@@ -203,7 +206,7 @@ export const buildModel = ({
   const boxes = new Map<string, Box & {lines: string[]; form: NodeForm; anchor: Anchor; textW: number}>();
   for (const n of nodes) {
     const lines = wrapLabel(n.label);
-    const textW = Math.max(...lines.map((l) => measure(l, type.nodeLabel, 600)), n.sub ? measure(n.sub, type.note, 500) : 0);
+    const textW = Math.max(...lines.map((l) => measure(l, type.nodeLabel, 600)), n.sub ? measure(n.sub, type.note, secondaryWeight) : 0);
     const form = nodeForm(n.kind, shape);
     const {w, h} = nodeSize(textW, lines.length, Boolean(n.sub), form);
     const extent = {x: n.x - w / 2, y: form === 'free' ? n.y - tokens.icon.freePx / 2 : n.y - h / 2, w, h};
@@ -254,7 +257,7 @@ export const buildModel = ({
     let text = c.text ?? '';
     const tone = c.tone ?? 'cobalt';
     const plain = tone === 'neutral' || tone === 'note';
-    const [size, weight] = tone === 'note' ? [type.chip, 500] : [type.chip, 700];
+    const [size, weight] = tone === 'note' ? [type.chip, secondaryWeight] : [type.chip, 700];
     let fill = plain ? color.raised : toneColor[tone];
     let widest = c.text ? measure(c.text, size, weight) : 0;
     if (c.counter) {
@@ -287,8 +290,11 @@ export const buildModel = ({
       : {x: spot.x - 2 - L.connector.labelOffset - c.w, y: spot.y - CHIP_H / 2 + step, w: c.w, h: CHIP_H};
   };
   const placedChips = chipViews.map((c, index) => {
-    const slot = chipViews.filter((o, j) => o.target === c.target && o.visible && j < index).length;
-    return {...c, box: chipBox(c, slot * (CHIP_H + 16))};
+    // Chips above it count by how present they are, so a chip slides up as the one above fades out (no snap).
+    const slot = chipViews.filter((o, j) => o.target === c.target && o.visible && j < index).reduce((sum, o) => sum + o.opacity, 0);
+    // The lowest it can sit: under every earlier chip on its target that overlaps it in time (camera framing).
+    const lowest = chipViews.filter((o, j) => o.target === c.target && j < index && o.t0 < c.t1 + dur.exit && o.t1 + dur.exit > c.t0).length;
+    return {...c, box: chipBox(c, slot * (CHIP_H + 16)), reach: chipBox(c, lowest * (CHIP_H + 16))};
   });
 
   // Cards pinned beside a node: at the icon's middle for free icons, 24 px off the node.
@@ -316,7 +322,7 @@ export const buildModel = ({
   const capsuleHalf = ((PACKET_FONT + 16) / 2) * Math.max(1, readable / (PACKET_FONT * minZoom));
   const pillOf = (g: (typeof geo)[number]): Box | null => {
     if (!g.label) return null;
-    const w = measure(g.label, type.connectorLabel, 500) + 28;
+    const w = measure(g.label, type.connectorLabel, secondaryWeight) + 28;
     const spot = labelSpot(g.pts);
     const carries = packets.some((pk) => pk.label && [`${pk.from}>${pk.to}`, `${pk.to}>${pk.from}`].includes(g.key));
     const off = L.connector.labelOffset + (carries ? capsuleHalf : 2);
@@ -363,7 +369,7 @@ export const buildModel = ({
     return union(
       targets.flatMap((t) => {
         const chip = placedChips.find((c) => c.id === t);
-        if (chip) return [all ? chipBox(chip) : chip.box];
+        if (chip) return [all ? chip.reach : chip.box];
         const pk = packets.find((p) => p.id === t && p.park !== undefined);
         if (pk) {
           const {pos, labeled, capW, k} = packetAt(pk, Infinity, zoom);
@@ -378,11 +384,11 @@ export const buildModel = ({
           const seg = union([{...a, w: 0, h: 0}, {...b, w: 0, h: 0}]);
           const trim = (len: number) => Math.min(32, len / 4);
           const inner = seg.w >= seg.h ? {...seg, x: seg.x + trim(seg.w), w: seg.w - 2 * trim(seg.w)} : {...seg, y: seg.y + trim(seg.h), h: seg.h - 2 * trim(seg.h)};
-          return [inflate(inner, 8), ...placedChips.filter((c) => c.target === t && (all || c.visible)).map((c) => (all ? chipBox(c) : c.box))];
+          return [inflate(inner, 8), ...placedChips.filter((c) => c.target === t && (all || c.visible)).map((c) => (all ? c.reach : c.box))];
         }
         return [
           boxOf(t),
-          ...placedChips.filter((c) => c.target === t && (all || c.visible)).map((c) => (all ? chipBox(c) : c.box)),
+          ...placedChips.filter((c) => c.target === t && (all || c.visible)).map((c) => (all ? c.reach : c.box)),
           ...cardViews.filter((c) => c.target === t && (all || c.visible)).map((c) => c.box),
         ];
       }),
@@ -392,7 +398,7 @@ export const buildModel = ({
     const set = new Set(ids);
     const linked = (g: (typeof geo)[number]) => set.has(g.from) && set.has(g.to);
     const during = (a: number, b: number) => a < t1 && b > t0;
-    const shown = chipViews.filter((c) => (set.has(c.target) || geo.some((g) => g.key === c.target && linked(g))) && during(c.t0, c.t1));
+    const shown = placedChips.filter((c) => (set.has(c.target) || geo.some((g) => g.key === c.target && linked(g))) && during(c.t0, c.t1));
     const pinned = cardViews.filter((c) => set.has(c.target) && during(c.t0, c.t1)).map((c) => c.box);
     const loops = markers.flatMap((m, i) =>
       (m.kind ?? 'circle') === 'circle' && targetsOf(m).some((t) => set.has(t)) && during(markerTimes[i], markerEnd(i))
@@ -400,14 +406,15 @@ export const buildModel = ({
         : [],
     );
     const pills = geo.filter(linked).map(pillOf).filter((b): b is Box => b !== null);
-    return inflate(union([...ids.map(boxOf), ...pills, ...shown.map((c) => chipBox(c)), ...pinned, ...loops]), FRAME_MARGIN);
+    return inflate(union([...ids.map(boxOf), ...pills, ...shown.map((c) => c.reach), ...pinned, ...loops]), FRAME_MARGIN);
   };
   const allIds = nodes.map((n) => n.id);
-  const full = fit(frameBox(allIds, -Infinity, Infinity), stage, minZoom, Math.max(1, minZoom));
+  const fullBox = frameBox(allIds, -Infinity, Infinity);
+  const full = fit(fullBox, stage, minZoom, Math.max(1, minZoom));
   if (full.fits < minZoom) {
     throw new Error(
-      `SystemDiagram: the overview needs zoom ${full.fits.toFixed(2)} but ${smallest} px canvas text needs >= ${minZoom.toFixed(2)} ` +
-        'to stay readable. Use fewer nodes, or move them closer.',
+      `SystemDiagram: the overview needs zoom ${full.fits.toFixed(3)} but ${smallest} px canvas text needs >= ${minZoom.toFixed(2)} ` +
+        `to stay readable (content ${Math.round(fullBox.w)}x${Math.round(fullBox.h)} px, stage ${stage.w}x${stage.h}). Use fewer nodes, or move them closer.`,
     );
   }
   // Nodes enter in groups: a chain of entries each within 0.5 s of the previous (a stagger) is one group.
@@ -448,7 +455,8 @@ export const buildModel = ({
       return {cx: pos.x, cy: pos.y, zoom};
     }
     const into = shot.into ?? stage;
-    const f = fit(frameBox(enteredBy(shot.t), shot.t, until), into, minZoom, Math.max(1, minZoom));
+    const whole = frameFrom === Infinity;
+    const f = fit(frameBox(enteredBy(shot.t), whole ? -Infinity : shot.t, whole ? Infinity : until), into, minZoom, Math.max(1, minZoom));
     // Offset the camera so the framed box lands at the sub-rect's center, not the stage's.
     return {...f, cx: f.cx - (into.x + into.w / 2 - stage.x - stage.w / 2) / f.zoom, cy: f.cy - (into.y + into.h / 2 - stage.y - stage.h / 2) / f.zoom};
   };
@@ -515,6 +523,14 @@ const maskOf = (stage: Box) => {
   ].join(', ');
 };
 
+/** A dashed connector drawn on up to `drawn` px: the dash pattern so far, then one gap over the rest (no snap at the end). */
+export const drawnDashes = (drawn: number, total: number, [dash, gap] = L.group.dash) => {
+  const parts: number[] = [];
+  for (let acc = 0; acc < drawn; acc += dash + gap) parts.push(Math.min(dash, drawn - acc), Math.min(gap, Math.max(0, drawn - acc - dash)));
+  if (parts.length) parts[parts.length - 1] += total;
+  return (parts.length ? parts : [0, total]).join(' ');
+};
+
 /** Where a node is anchored for a glide: a free icon's center, or a box's center. */
 const refOf = (b: Box & {form: NodeForm}): Point => ({x: b.x + b.w / 2, y: b.form === 'free' ? b.y + tokens.icon.freePx / 2 : b.y + b.h / 2});
 
@@ -533,13 +549,19 @@ const morphFrom = (next: Props & {shape: Layout}, prev: NonNullable<ChapterLink[
   const {glideEnd} = morphTiming;
   const present = -10; // carried elements are already there when the chapter starts
   let entering = 0;
+  const nodes = next.nodes.map((n) =>
+    shared.has(n.id) ? {...n, at: present} : {...n, at: Math.max(time.at(n.at ?? 0), glideEnd + dur.stagger * entering++)},
+  );
+  // A new connector waits for a new end node to start sketching in, so it never reaches into empty space.
+  const endAt = (id: string) => {
+    const n = nodes.find((m) => m.id === id);
+    return n && !shared.has(id) ? (n.at as number) + 0.3 : -Infinity;
+  };
   const props: Props & {shape: Layout} = {
     ...next,
     // The camera frames the layout the glide lands in, including the nodes that sketch in right after it.
     frameFrom: Math.max(glideEnd + 0.5, next.frameFrom ?? -Infinity),
-    nodes: next.nodes.map((n) =>
-      shared.has(n.id) ? {...n, at: present} : {...n, at: Math.max(time.at(n.at ?? 0), glideEnd + dur.stagger * entering++)},
-    ),
+    nodes,
     // Cards and chips land with their nodes: drawn at their final spot mid-glide, they would sit on top of
     // the nodes still moving there.
     cards: (next.cards ?? []).map((c) => ({...c, at: Math.max(time.at(c.at), glideEnd)})),
@@ -547,7 +569,7 @@ const morphFrom = (next: Props & {shape: Layout}, prev: NonNullable<ChapterLink[
     edges: (next.edges ?? []).map((e) =>
       sharedEdges.has(keyOf(e))
         ? {...e, at: present, labelAt: Math.max(time.at(e.labelAt ?? e.at ?? 0), glideEnd)}
-        : {...e, at: Math.max(time.at(e.at ?? 0), glideEnd)},
+        : {...e, at: Math.max(time.at(e.at ?? 0), glideEnd, endAt(e.from), endAt(e.to))},
     ),
     states: [
       ...[...shared, ...sharedEdges].flatMap((target) => {
@@ -649,7 +671,6 @@ const Diagram = (props: Props & {shape: Layout}) => {
               const pts = routeOf(g);
               const d = roundedPath(trimEnd(pts, L.connector.arrowhead * 0.8));
               const ev = evolvePath(p, d);
-              const dashed = p >= 1 && g.dashed;
               const pill = pillOf(g);
               return (
                 <g key={g.key} opacity={edgeVis(g)}>
@@ -659,13 +680,13 @@ const Diagram = (props: Props & {shape: Layout}) => {
                     stroke={stroke}
                     strokeWidth={L.connector.stroke}
                     strokeLinecap="round"
-                    strokeDasharray={dashed ? L.group.dash.join(' ') : ev.strokeDasharray}
-                    strokeDashoffset={dashed ? 0 : ev.strokeDashoffset}
+                    strokeDasharray={g.dashed ? drawnDashes(p * getLength(d), getLength(d)) : ev.strokeDasharray}
+                    strokeDashoffset={g.dashed ? 0 : ev.strokeDashoffset}
                   />
                   <polygon points={arrowhead(pts)} fill={stroke} opacity={progressAt(since - DRAW + 0.12, 0.12)} />
                   {pill ? (
                     <g opacity={progressAt(g.labelAt === undefined ? since - DRAW * 0.5 : now - at(g.labelAt), dur.enter) * inView(pill)}>
-                      <rect x={pill.x} y={pill.y} width={pill.w} height={pill.h} rx={pill.h / 2} fill={color.night} />
+                      <rect x={pill.x} y={pill.y} width={pill.w} height={pill.h} rx={pill.h / 2} fill={color.canvas} />
                       <text
                         x={pill.x + pill.w / 2}
                         y={pill.y + pill.h / 2}
@@ -673,7 +694,7 @@ const Diagram = (props: Props & {shape: Layout}) => {
                         dominantBaseline="central"
                         fill={color.pencil}
                         fontFamily={font.ui}
-                        fontWeight={500}
+                        fontWeight={secondaryWeight}
                         fontSize={type.connectorLabel}
                       >
                         {g.label}
@@ -729,6 +750,10 @@ const Diagram = (props: Props & {shape: Layout}) => {
               // The slow 2 s pulse is reserved for an overloaded node.
               const pulse = cur === 'hot' ? 0.75 + 0.25 * Math.sin((2 * Math.PI * now * 1000) / tokens.motion.overloadPulsePeriodMs) : 1;
               const glowStyle = lit ? {filter: glow(stroke, mix * pulse)} : undefined;
+              // Day paper has no glow to carry a state, so a colored state also tints the fill and thickens the border.
+              const colored = (st: NodeState) => (st === 'active' || st === 'hot' || st === 'ok' ? 1 : 0);
+              const tint = (colored(prev) * (1 - mix) + colored(cur) * mix) * pulse;
+              const boxStroke = L.node.stroke + (theme.emphasis.stateStrokePx - L.node.stroke) * tint;
               // Icons sketch in (strokes draw on), then the label fades in; a box fades in with its icon.
               const sketch = progressAt(since, tokens.icon.sketchInMs / 1000, ease.standard);
               const labelIn = n.kind ? progressAt(since - (tokens.icon.sketchInMs + tokens.icon.labelDelayMs) / 1000, dur.emphasis, ease.standard) : 1;
@@ -754,6 +779,7 @@ const Diagram = (props: Props & {shape: Layout}) => {
               const textX = b.form === 'boxed' ? icon!.x + iconSize + tokens.icon.gapToLabelPx : b.x + b.w / 2;
               const anchor = b.form === 'boxed' ? 'start' : 'middle';
               const iconBox = icon ? {x: icon.x, y: icon.y, w: iconSize, h: iconSize} : b;
+              const tintBox = free ? inflate(iconBox, 12) : b;
               const arrivals = packets
                 .map((pk) => ({pk, info: packetAt(pk, now, cam.zoom)}))
                 .filter(({pk, info}) => pk.to === n.id && info.labeled && now >= info.arrive && now < info.arrive + dur.arrivalPulse);
@@ -772,11 +798,14 @@ const Diagram = (props: Props & {shape: Layout}) => {
                       rx={L.node.radius}
                       fill={color.raised}
                       stroke={stroke}
-                      strokeWidth={L.node.stroke}
+                      strokeWidth={boxStroke}
                       opacity={boxIn}
                       style={glowStyle}
                     />
                   )}
+                  {tint > 0 && theme.emphasis.tintOpacity > 0 ? (
+                    <rect x={tintBox.x} y={tintBox.y} width={tintBox.w} height={tintBox.h} rx={free ? 28 : L.node.radius} fill={stroke} opacity={theme.emphasis.tintOpacity * tint * boxIn} />
+                  ) : null}
                   {n.kind && icon ? (
                     <Icon
                       kind={n.kind}
@@ -784,7 +813,7 @@ const Diagram = (props: Props & {shape: Layout}) => {
                       y={icon.y}
                       size={iconSize}
                       color={iconColor}
-                      strokeWidth={free ? tokens.icon.strokeWidth.free : tokens.icon.strokeWidth.inNode}
+                      strokeWidth={free ? theme.iconStroke.free : theme.iconStroke.inNode}
                       progress={sketch}
                       style={free ? glowStyle : undefined}
                     />
@@ -813,7 +842,7 @@ const Diagram = (props: Props & {shape: Layout}) => {
                         dominantBaseline="central"
                         fill={color.pencil}
                         fontFamily={font.ui}
-                        fontWeight={500}
+                        fontWeight={secondaryWeight}
                         fontSize={type.note}
                       >
                         {n.sub}
@@ -880,7 +909,7 @@ const Diagram = (props: Props & {shape: Layout}) => {
                     dominantBaseline="central"
                     fill={c.tone === 'neutral' || c.tone === 'note' ? color.pencil : color.onSignal}
                     fontFamily={font.ui}
-                    fontWeight={c.tone === 'note' ? 500 : 700}
+                    fontWeight={c.tone === 'note' ? secondaryWeight : 700}
                     fontSize={type.chip}
                     letterSpacing="0.02em"
                     style={{fontVariantNumeric: 'tabular-nums'}}

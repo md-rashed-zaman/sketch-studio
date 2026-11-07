@@ -1,5 +1,5 @@
 import {measureText} from '@remotion/layout-utils';
-import {alpha, color, dur, ease, font, tokens, tone as toneColor, type, type Tone} from '../theme';
+import {alpha, color, dur, ease, font, secondaryWeight, tokens, tone as toneColor, type, type Tone} from '../theme';
 import {useFontsReady} from '../fonts';
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 import type {Point} from '../diagram/geometry';
@@ -84,7 +84,7 @@ export const CodeCard = ({x, y, w, title, lines, dashed = false, at = 0, until, 
         }}
       />
       {title ? (
-        <div style={{position: 'absolute', left: PAD_X, top: PAD_Y - 4, fontFamily: font.ui, fontWeight: 500, fontSize: type.chip, color: color.pencil}}>{title}</div>
+        <div style={{position: 'absolute', left: PAD_X, top: PAD_Y - 4, fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil}}>{title}</div>
       ) : null}
       {lines.map((l, i) => {
         const start = resolve(l.at);
@@ -167,7 +167,7 @@ export const CodeCard = ({x, y, w, title, lines, dashed = false, at = 0, until, 
         );
       })}
       {label ? (
-        <div style={{position: 'absolute', left: 0, top: height + 12, fontFamily: font.ui, fontWeight: 500, fontSize: type.chip, color: color.pencil, opacity: progressAt(now - resolve(label.at))}}>
+        <div style={{position: 'absolute', left: 0, top: height + 12, fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil, opacity: progressAt(now - resolve(label.at))}}>
           {label.text}
         </div>
       ) : null}

@@ -1,6 +1,6 @@
 import type {CSSProperties, ReactNode} from 'react';
 import {AbsoluteFill, useVideoConfig} from 'remotion';
-import {color, dur, ease, font, layout as L, tokens, toneText, type, type Tone} from '../theme';
+import {color, dur, ease, font, layout as L, secondaryWeight, tokens, toneText, type, type Tone} from '../theme';
 import {progressAt, useSceneTime, type SceneInfo} from '../motion/cues';
 import {labelTiming, useChapterLink, useGhost} from './transition';
 import {minReadable, safeArea, shortsTitleTop, stageArea, useLayout, type Layout} from './surface';
@@ -12,7 +12,7 @@ const clock = (seconds: number) => `${pad2(Math.floor(seconds / 60))}:${pad2(Mat
 export const Paper = () => (
   <AbsoluteFill
     style={{
-      background: color.night,
+      background: color.canvas,
       backgroundImage: `radial-gradient(${color.grid} ${L.dotGrid.dot / 2}px, transparent ${L.dotGrid.dot / 2 + 0.1}px)`,
       backgroundSize: `${L.dotGrid.spacing}px ${L.dotGrid.spacing}px`,
       backgroundPosition: `${L.dotGrid.spacing / 2}px ${L.dotGrid.spacing / 2}px`,
@@ -58,7 +58,7 @@ export const Em = ({children, tone = 'cobalt'}: {children: ReactNode; tone?: Ton
 
 /** Secondary note: pencil, six words at most; 36 px, or the 52 px floor in Shorts. */
 export const Note = ({children, style}: {children: ReactNode; style?: CSSProperties}) => (
-  <div style={{fontFamily: font.ui, fontWeight: 500, fontSize: minReadable[useLayout()], color: color.pencil, ...style}}>{children}</div>
+  <div style={{fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: minReadable[useLayout()], color: color.pencil, ...style}}>{children}</div>
 );
 
 /** The sheet frame text: `SHEET nn/NN . CHAPTER . T+mm:ss` with the running episode time. */

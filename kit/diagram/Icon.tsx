@@ -1,11 +1,11 @@
 import {createElement, type CSSProperties} from 'react';
-import {color as palette, tokens} from '../theme';
+import {color as palette, theme, tokens} from '../theme';
 import {iconShapes, type IconKind} from './icons';
 
 /**
  * A Lucide icon by our component key, drawn as SVG with its top-left at (x, y), `size` px square.
  * `progress` 0..1 sketches the strokes in one after another (each stroke's dash offset runs 1 -> 0).
- * `strokeWidth` is in Lucide's 24-unit space (tokens: 1.25 in a node, 1.1 free-standing).
+ * `strokeWidth` is in Lucide's 24-unit space (per theme: `iconStroke.inNode` in a node, `.free` free-standing).
  */
 export const Icon = ({
   kind,
@@ -13,7 +13,7 @@ export const Icon = ({
   y = 0,
   size = tokens.icon.inNodePx,
   color = palette.chalk,
-  strokeWidth = tokens.icon.strokeWidth.inNode,
+  strokeWidth = theme.iconStroke.inNode,
   progress = 1,
   style,
 }: {

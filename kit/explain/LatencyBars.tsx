@@ -1,4 +1,4 @@
-import {color, dur, ease, font, tone as toneColor, toneText, type, type Tone} from '../theme';
+import {color, dur, ease, font, secondaryWeight, tone as toneColor, toneText, type, type Tone} from '../theme';
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 
 export type LatencyRow = {label: string; seconds: number; value: string; tone: Tone; at: At};
@@ -95,7 +95,7 @@ export const LatencyBars = ({
           </div>
         );
       })}
-      {caption ? <div style={{fontWeight: 500, fontSize: type.chip, color: color.pencil}}>{caption}</div> : null}
+      {caption ? <div style={{fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil}}>{caption}</div> : null}
     </div>
   );
 };

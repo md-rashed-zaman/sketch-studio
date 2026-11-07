@@ -4,7 +4,7 @@ import {alpha, color, dur, ease, font, tokens, tone as toneColor, type Tone} fro
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 
 /**
- * One cache entry as a card: `key → value`, in code type on light paper. The key or the value lights up
+ * One cache entry as a card: `key → value`, in code type on an ink card. The key or the value lights up
  * (cobalt) on its cue; a new value flashes its tone as it swaps in; `outline` rings the card (e.g. coral
  * for stale data). Fills its container (pin it with a diagram card, or give it a `style`).
  */
@@ -41,7 +41,7 @@ export const KeyValueCard = ({
     padding: '2px 10px',
     borderRadius: 10,
     background: on ? toneColor.cobalt : 'transparent',
-    color: color.night,
+    color: color.canvas,
   });
   return (
     <div
@@ -59,7 +59,7 @@ export const KeyValueCard = ({
         fontFamily: font.code,
         fontWeight: 500,
         fontSize: tokens.type.code,
-        color: color.night,
+        color: color.canvas,
         whiteSpace: 'nowrap',
         opacity: p * (1 - out),
         transform: `translateY(${(1 - p) * tokens.motion.enterRisePx}px)`,

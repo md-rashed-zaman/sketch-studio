@@ -1,7 +1,7 @@
 import {evolvePath} from '@remotion/paths';
 import {measureText} from '@remotion/layout-utils';
 import {useVideoConfig} from 'remotion';
-import {color, dur, ease, font, type} from '../theme';
+import {color, dur, ease, font, theme, type} from '../theme';
 import {useFontsReady} from '../fonts';
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 import {
@@ -113,7 +113,7 @@ export const MarkerDrawing = ({layout, since, fade}: {layout: ReturnType<typeof 
         d={layout.d}
         fill="none"
         stroke={color.amber}
-        strokeWidth={5}
+        strokeWidth={theme.marker.strokePx}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeDasharray={ev.strokeDasharray}
@@ -125,7 +125,7 @@ export const MarkerDrawing = ({layout, since, fade}: {layout: ReturnType<typeof 
           y={n.y + n.h / 2}
           textAnchor="middle"
           dominantBaseline="central"
-          fill={color.amber}
+          fill={color.amberText}
           fontFamily={font.marker}
           fontWeight={700}
           fontSize={type.marker}

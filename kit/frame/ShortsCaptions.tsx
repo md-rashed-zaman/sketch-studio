@@ -28,7 +28,7 @@ export const captionPages = (captions: Caption[], maxWords = 4, maxChars = 20): 
 };
 
 /**
- * Shorts keyword captions: 2-4 words, Inter 700 at 64 px, chalk on a night pill at 22% from the top
+ * Shorts keyword captions: 2-4 words, Inter 700 at 64 px, chalk on a canvas pill at 22% from the top
  * (above the diagram, clear of the Shorts UI). The spoken word turns amber. Not for 16:9: long-form
  * gets an SRT instead (npm run srt).
  */
@@ -53,7 +53,7 @@ export const ShortsCaptions = ({captions}: {captions: Caption[]}) => {
       >
         <div
           style={{
-            background: color.night,
+            background: color.canvas,
             borderRadius: 999,
             padding: '10px 32px',
             fontFamily: font.ui,
@@ -65,7 +65,7 @@ export const ShortsCaptions = ({captions}: {captions: Caption[]}) => {
           }}
         >
           {page.words.map((w, i) => (
-            <span key={w.startMs} style={{color: w.startMs <= ms && ms < w.endMs ? color.amber : color.chalk}}>
+            <span key={w.startMs} style={{color: w.startMs <= ms && ms < w.endMs ? color.amberText : color.chalk}}>
               {i ? ' ' : ''}
               {w.text.trim()}
             </span>

@@ -1,4 +1,4 @@
-import {color, dur, ease, font, toneText, type} from '../theme';
+import {color, dur, ease, font, secondaryWeight, toneText, type} from '../theme';
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 import {policyLabel, victimOf, type Policy, type Slot} from './eviction';
 
@@ -79,13 +79,13 @@ export const SlotGrid = ({
       }}
     >
       <div style={{fontFamily: font.code, fontWeight: 500, fontSize: type.code, color: color.chalk}}>{key}</div>
-      {label ? <div style={{fontFamily: font.ui, fontWeight: 500, fontSize: type.chip, color: color.pencil}}>{label}</div> : null}
+      {label ? <div style={{fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil}}>{label}</div> : null}
     </div>
   );
   const inP = progressAt(now - at(incoming.at));
   return (
     <div style={{position: 'absolute', inset: 0}}>
-      <div style={{position: 'absolute', left: L.waiting.x, top: L.waiting.y - 56, fontFamily: font.ui, fontWeight: 500, fontSize: type.chip, color: color.pencil, opacity: inP * (1 - (evicted?.p ?? 0))}}>
+      <div style={{position: 'absolute', left: L.waiting.x, top: L.waiting.y - 56, fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil, opacity: inP * (1 - (evicted?.p ?? 0))}}>
         new
       </div>
       {/* The empty tray says what it is for; the label sits inside, so a marker loop around the evicted
@@ -104,7 +104,7 @@ export const SlotGrid = ({
           alignItems: 'center',
           justifyContent: 'center',
           fontFamily: font.ui,
-          fontWeight: 500,
+          fontWeight: secondaryWeight,
           fontSize: type.chip,
           color: color.pencil,
           opacity: phase ? progressAt(now - at(phase.at)) : 0,

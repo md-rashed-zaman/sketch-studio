@@ -1,4 +1,4 @@
-import {color, dur, ease, font, tone as toneColor, type, type Tone} from '../theme';
+import {color, dur, ease, font, secondaryWeight, tone as toneColor, type, type Tone} from '../theme';
 import {progressAt, useSceneTime, type At} from '../motion/cues';
 
 const LABEL_W = 300;
@@ -101,7 +101,7 @@ export const TtlTimeline = ({
             {ticks.map((t, k) => (
               <div key={`t${k}`} style={{position: 'absolute', left: axisX + t.x - 2, top: -8, width: 4, height: BAR_H + 16, background: r.kind === 'refills' ? toneColor.coral : color.graphite}}>
                 {t.text ? (
-                  <div style={{position: 'absolute', left: 12, top: BAR_H + 20, fontWeight: 500, fontSize: type.chip, color: color.pencil, whiteSpace: 'nowrap'}}>{t.text}</div>
+                  <div style={{position: 'absolute', left: 12, top: BAR_H + 20, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil, whiteSpace: 'nowrap'}}>{t.text}</div>
                 ) : null}
               </div>
             ))}
@@ -127,7 +127,7 @@ export const TtlTimeline = ({
         );
       })}
       {visible.length ? (
-        <div style={{position: 'absolute', left: axisX + axisW - 200, top: rows.length * rowH - 50, fontWeight: 500, fontSize: type.chip, color: color.pencil}}>
+        <div style={{position: 'absolute', left: axisX + axisW - 200, top: rows.length * rowH - 50, fontWeight: secondaryWeight, fontSize: type.chip, color: color.pencil}}>
           {axisLabel}
         </div>
       ) : null}

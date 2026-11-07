@@ -1,6 +1,6 @@
 import type {CSSProperties, ReactNode} from 'react';
 import {interpolate} from 'remotion';
-import {color, dur, ease, font, tokens, type} from '../theme';
+import {color, dur, ease, font, secondaryWeight, tokens, type} from '../theme';
 import {progressAt, useCue, useSceneTime, type At} from '../motion/cues';
 import {minReadable, useLayout} from '../frame/surface';
 
@@ -42,7 +42,7 @@ export const LoadMeter = ({
   const size = minReadable[useLayout()];
   return (
     <div style={{opacity: p, ...style}}>
-      <div style={{fontFamily: font.ui, fontWeight: 500, fontSize: size, color: color.pencil, fontVariantNumeric: 'tabular-nums'}}>
+      <div style={{fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: size, color: color.pencil, fontVariantNumeric: 'tabular-nums'}}>
         Load {fmt(value)} {unit} / capacity {fmt(capacity)}
       </div>
       <div style={{marginTop: 16, height: 18, borderRadius: 9, background: color.raised, border: `2px solid ${color.grid}`}}>
@@ -51,6 +51,41 @@ export const LoadMeter = ({
     </div>
   );
 };
+
+export type MetricRow = {label: string; steps: Step[]; unit: string; max: number; threshold: number};
+
+const Metric = ({label, steps, unit, max, threshold, size}: MetricRow & {size: number}) => {
+  const value = useRolled(steps);
+  return (
+    <div style={{display: 'flex', alignItems: 'center', gap: 24, height: size * 1.9}}>
+      <div style={{width: size * 5.4, fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: size, color: color.pencil}}>{label}</div>
+      <div style={{flex: 1, height: 18, borderRadius: 9, background: color.raised, border: `2px solid ${color.grid}`}}>
+        <div style={{height: '100%', width: `${Math.min(1, value / max) * 100}%`, borderRadius: 9, background: value > threshold ? color.coral : color.mint}} />
+      </div>
+      <div style={{width: size * 4.2, textAlign: 'right', fontFamily: font.ui, fontWeight: 700, fontSize: size, color: color.chalk, fontVariantNumeric: 'tabular-nums'}}>
+        {fmt(value)}
+        {unit}
+      </div>
+    </div>
+  );
+};
+
+/** "Scale It" server health: one row per number (CPU, memory, page time), bar coral above its threshold. */
+export const MetricRows = ({rows, at = 0, until, style}: {rows: MetricRow[]; at?: At; until?: At; style?: CSSProperties}) => {
+  const {now, at: resolve} = useSceneTime();
+  const p = useCue(at) * (until === undefined ? 1 : 1 - progressAt(now - resolve(until), dur.exit, ease.exit));
+  const size = minReadable[useLayout()];
+  return (
+    <div style={{opacity: p, ...style}}>
+      {rows.map((r) => (
+        <Metric key={r.label} {...r} size={size} />
+      ))}
+    </div>
+  );
+};
+
+/** Screen box of a MetricRows block (for a marker), given its left, top, width and row count. */
+export const metricRowsBox = ({x, y, w, count}: {x: number; y: number; w: number; count: number}) => ({x, y, w, h: count * type.minReadablePx * 1.9});
 
 /** One hero number per scene, rolling to its value and settling at 1.04x. */
 export const HeroNumber = ({
@@ -85,12 +120,12 @@ export const HeroNumber = ({
         {fmt(value)}
         {suffix}
       </div>
-      {note ? <div style={{marginTop: 20, fontFamily: font.ui, fontWeight: 500, fontSize: size, color: color.pencil}}>{note}</div> : null}
+      {note ? <div style={{marginTop: 20, fontFamily: font.ui, fontWeight: secondaryWeight, fontSize: size, color: color.pencil}}>{note}</div> : null}
     </div>
   );
 };
 
-/** A light paper card pinned into the notebook: quotes, sources, doc screenshots. */
+/** An ink card pinned into the notebook: quotes, sources, doc screenshots. */
 export const PaperCard = ({
   children,
   source,
@@ -120,7 +155,7 @@ export const PaperCard = ({
         opacity: p * (1 - out),
         transform: `translateY(${(1 - p) * tokens.motion.enterRisePx}px) rotate(${tilt}deg)`,
         background: color.card,
-        color: color.night,
+        color: color.canvas,
         borderRadius: 16,
         padding: small ? '14px 24px' : '40px 48px',
         fontFamily: font.ui,
@@ -131,7 +166,7 @@ export const PaperCard = ({
         {children}
       </div>
       {/* graphite is reserved for strokes, so the source is dimmed ink */}
-      {source ? <div style={{marginTop: 24, fontWeight: 500, fontSize: size, opacity: 0.7}}>{source}</div> : null}
+      {source ? <div style={{marginTop: 24, fontWeight: secondaryWeight, fontSize: size, opacity: 0.7}}>{source}</div> : null}
     </div>
   );
 };

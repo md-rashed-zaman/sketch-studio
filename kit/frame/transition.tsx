@@ -44,16 +44,17 @@ export const useGhost = () => useContext(GhostContext);
 /**
  * What a morph carries over: nodes with the same id, and connectors between them that existed before and are
  * present again by the end of the glide (`resolve` turns a connector's `at` into scene seconds); a connector
- * the next chapter draws later leaves with the ghost and draws on its own cue.
+ * the next chapter draws later leaves with the ghost and draws on its own cue. So does one whose route shape
+ * changes: carried, it would jump to the new shape on the old layout before the glide starts.
  */
 export const carried = (prev: DiagramProps, next: DiagramProps, resolve: (at: At) => number = () => 0) => {
   const prevIds = new Set(prev.nodes.map((n) => n.id));
-  const prevEdges = new Set((prev.edges ?? []).map((e) => `${e.from}>${e.to}`));
+  const prevRoutes = new Map((prev.edges ?? []).map((e) => [`${e.from}>${e.to}`, e.route ?? 'auto']));
   const shared = new Set(next.nodes.filter((n) => prevIds.has(n.id)).map((n) => n.id));
   const sharedEdges = new Set(
     (next.edges ?? [])
       .map((e) => ({e, key: `${e.from}>${e.to}`}))
-      .filter(({e, key}) => shared.has(e.from) && shared.has(e.to) && prevEdges.has(key) && resolve(e.at ?? 0) <= morphTiming.glideEnd)
+      .filter(({e, key}) => shared.has(e.from) && shared.has(e.to) && prevRoutes.get(key) === (e.route ?? 'auto') && resolve(e.at ?? 0) <= morphTiming.glideEnd)
       .map(({key}) => key),
   );
   return {shared, sharedEdges};
