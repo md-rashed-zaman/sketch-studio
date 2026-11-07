@@ -12,6 +12,7 @@ import {
   stampedeShortAudio,
   ttlShortAudio,
 } from '../episodes/caching/episode';
+import {ScalingEpisode, scalingAudio} from '../episodes/scaling/episode';
 
 export const RemotionRoot = () => (
   <>
@@ -47,6 +48,15 @@ export const RemotionRoot = () => (
         id="caching"
         component={CachingEpisode}
         calculateMetadata={durationFromAudio(cachingAudio, 12)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="scaling"
+        component={ScalingEpisode}
+        calculateMetadata={durationFromAudio(scalingAudio, 12)}
         durationInFrames={FPS}
         fps={FPS}
         width={1920}
