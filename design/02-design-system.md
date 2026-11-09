@@ -308,10 +308,11 @@ Never the marker color, never across the diagram.
 - **Shorts (1080x1920):**
   - Same tokens; diagrams re-laid out vertically (top to bottom), not cropped.
   - Labels at least 52 px.
+  - **Moving picture from frame one:** the first second shows a diagram with motion (packets, a counter), never a bare title. A swipe decides in about a second.
   - Critical content inside the central 900x1300 px. Keep the bottom 35% and right 15% clear of text.
-  - **Burned keyword captions:** 2-4 words, Inter 700 at 64 px, chalk on a `paper.canvas` pill. Placed at about 22% from the top, *above* the diagram, never over the bottom UI. The active word is in `marker.text`.
+  - **Burned keyword captions:** 2-4 words, Inter 700 at 64 px, `paper.raised` text on a dark `paper.card` pill, so they never read as diagram text. Centred at 62% from the top, *below* the diagram and just above the bottom 35% Shorts UI zone. The scene title sits at the top of the safe area. The active word is in `marker.stroke`.
 - **Thumbnails:**
-  - Night-paper background; one diagram fragment at large scale with **one** coral or mint state.
+  - Paper background in the active theme (Day Paper); one diagram fragment at large scale with **one** coral or mint state.
   - 2-4 words in Space Grotesk 700, at least 160 px tall at 1280x720.
   - One marker circle or arrow on the object.
   - No faces, no stock photos.

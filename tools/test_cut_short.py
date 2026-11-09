@@ -21,3 +21,9 @@ def test_cut_keeps_only_the_window_and_shifts_it_to_zero():
     # a word that runs past the end of the cut is dropped, not truncated
     assert [c["text"] for c in part["captions"]] == ["Imagine", "down."]
     assert part["captions"][0]["startMs"] == 500 and part["captions"][0]["timestampMs"] == 500
+
+
+def test_a_split_starts_a_second_scene_at_that_time():
+    part = cut_timing(TIMING, "bug", 10.5, 25.0, [("fix", 15.0)])
+    assert part["scenes"] == {"bug": [0, 4.5], "fix": [4.5, 14.5]}
+    assert part["cues"] == {"hot": 2.0, "down": 9.5}

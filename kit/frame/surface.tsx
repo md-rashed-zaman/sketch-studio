@@ -24,13 +24,13 @@ export const safeArea: Record<Layout, Rect> = {
   '9:16': shortsSafe,
 };
 
-// Shorts, top to bottom: caption pill centred at 22%, then the scene title, then the stage.
-// The bottom 35% and right 15% stay clear of text.
-const captionBottom = shorts.h * (shorts.captionTopPct / 100) + 48;
-export const shortsTitleTop = captionBottom + 16;
+// Shorts, top to bottom: the scene title at the top of the safe area, then the stage, then the dark caption
+// pill centred at 62%, just above the bottom 35% that stays clear for the Shorts UI (as does the right 15%).
+export const shortsTitleTop = shortsSafe.y;
 const shortsStageTop = shortsTitleTop + type.sceneTitle * 1.05 + 28;
+const captionTop = shorts.h * (shorts.captionTopPct / 100) - (type.shortsCaption * 1.2 + 20) / 2;
 const shortsStageRight = Math.min(shortsSafe.x + shortsSafe.w, shorts.w * (1 - shorts.clearRightPct / 100));
-const shortsStageBottom = Math.min(shortsSafe.y + shortsSafe.h, shorts.h * (1 - shorts.clearBottomPct / 100));
+const shortsStageBottom = Math.min(shortsSafe.y + shortsSafe.h, shorts.h * (1 - shorts.clearBottomPct / 100), captionTop - 24);
 
 /** The region the diagram camera frames: below the title zone, above the sheet frame. */
 export const stageArea: Record<Layout, Rect> = {

@@ -6,7 +6,7 @@ type Page = {words: Caption[]; start: number; end: number};
 
 /**
  * Groups word timings into 2-4 word pages, breaking after punctuation and at pauses. A page also stays
- * within `maxChars` so it fits the pill on one line (a second line would land on the scene title).
+ * within `maxChars` so it fits the pill on one line (a second line would reach into the Shorts UI zone).
  */
 export const captionPages = (captions: Caption[], maxWords = 4, maxChars = 20): Page[] => {
   const pages: Page[] = [];
@@ -28,9 +28,9 @@ export const captionPages = (captions: Caption[], maxWords = 4, maxChars = 20): 
 };
 
 /**
- * Shorts keyword captions: 2-4 words, Inter 700 at 64 px, chalk on a canvas pill at 22% from the top
- * (above the diagram, clear of the Shorts UI). The spoken word turns amber. Not for 16:9: long-form
- * gets an SRT instead (npm run srt).
+ * Shorts keyword captions: 2-4 words, Inter 700 at 64 px, light text on a dark ink pill centred at 62% from
+ * the top (below the diagram, clear of the Shorts UI), so they never read as part of the diagram. The spoken
+ * word turns amber. Not for 16:9: long-form gets an SRT instead (npm run srt).
  */
 export const ShortsCaptions = ({captions}: {captions: Caption[]}) => {
   const frame = useCurrentFrame();
@@ -53,19 +53,19 @@ export const ShortsCaptions = ({captions}: {captions: Caption[]}) => {
       >
         <div
           style={{
-            background: color.canvas,
+            background: color.card,
             borderRadius: 999,
             padding: '10px 32px',
             fontFamily: font.ui,
             fontWeight: 700,
             fontSize: type.shortsCaption,
             lineHeight: 1.2,
-            color: color.chalk,
+            color: color.raised,
             textAlign: 'center',
           }}
         >
           {page.words.map((w, i) => (
-            <span key={w.startMs} style={{color: w.startMs <= ms && ms < w.endMs ? color.amberText : color.chalk}}>
+            <span key={w.startMs} style={{color: w.startMs <= ms && ms < w.endMs ? color.amber : color.raised}}>
               {i ? ' ' : ''}
               {w.text.trim()}
             </span>
