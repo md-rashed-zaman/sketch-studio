@@ -16,6 +16,7 @@ Backup if CTR stays under 4% after about 2 weeks: How One Expired Cache Key Take
 ## Description
 
 Your app works fine with 50 users. Then a post goes viral and every page takes 3 seconds. Most of the time, the fix is one idea: a cache.
+Next, scale your app to 1 million users: https://youtu.be/2ZNj0XKxAOs
 
 In this video we build caching from scratch: where to put a cache, how data gets in (cache-aside vs read-through), how it stays fresh (write-through, write-back, write-around, TTLs), what gets thrown out (LRU, LFU, FIFO), and the cache stampede bug that takes down even big companies.
 
@@ -40,7 +41,6 @@ Sources and notes:
 - "Two hard things" quote: attributed to Phil Karlton (https://martinfowler.com/bliki/TwoHardThings.html)
 - Request counts, user counts and latencies in the diagrams are illustrative.
 
-Next: scaling an API from 100 users to 1 million.
 
 #systemdesign #caching #softwareengineering
 

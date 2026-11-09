@@ -14,9 +14,10 @@ Backup if CTR stays under 4% after about 2 weeks: 1 Million Users Is Only 230 Re
 
 ## Description
 
-Your app works on one server. Then people tell their friends: a thousand users, ten thousand, a million. Which part breaks first?
+How do you scale an app from one server to 1 million users without adding everything at once? One bottleneck at a time.
+Caching in detail (step 7): https://youtu.be/745fVcs-q5w
 
-In this video we grow one online shop from a single server to a million daily users, and we only add a piece when a number tells us to: split the database (and add the index first), a bigger server, more servers behind a load balancer (and why the second server logs everyone out), object storage for photos, a cache and a CDN, connection pooling and read replicas (and replication lag), and queues.
+We grow one online shop from a single server to a million daily users and only add a piece when a number tells us to: split the database (and add the index first), a bigger server, more servers behind a load balancer (and why the second server logs everyone out), object storage for photos, a cache and a CDN, connection pooling and read replicas (and replication lag), and queues.
 
 Chapters:
 00:00 Intro
@@ -36,8 +37,6 @@ Sources and notes:
 - 1,000,000 daily users x 20 requests = 20,000,000 a day, about 230 a second on average. Twenty requests per user is an assumption.
 - User counts, "ready for" milestones, CPU, page times, query times, connection counts and checkout times in the diagrams are illustrative.
 
-The caching video (step 7 in detail): <link after upload>
-
 #systemdesign #scaling #softwareengineering
 
 ## Tags
@@ -55,10 +54,17 @@ scaling, system design, scale to million users, scalability, load balancer, hori
 
 ## Shorts
 
-Post one every 2-3 days after the long video. On each: Related video = this video, same hashtags plus #shorts.
+Main video published 2026-11-09 20:00 (GMT+6): https://youtu.be/2ZNj0XKxAOs. Each Short is scheduled public at
+22:00 GMT+6 (16:00 UTC: India 21:30, Europe 17:00, US East 11:00), two days apart, with Related video = the main video.
 
-| File | Title | Cut (long-video time) |
-|---|---|---|
-| `out/short-million.mp4` | 1 million users is only 230 requests a second | 0:54-1:58 |
-| `out/short-sessions.mp4` | Why adding a second server logs your users out | 5:46-6:19 |
-| `out/short-lag.mp4` | You posted it, refreshed, and it's gone | 8:48-9:29 |
+| File | Title | Cut (long-video time) | Scheduled | Link |
+|---|---|---|---|---|
+| `out/short-million.mp4` | 1 Million Users Is Only 230 Requests a Second | 0:54-1:58 | Wed 2026-11-11 | https://youtube.com/shorts/tyRStiDKNsQ |
+| `out/short-sessions.mp4` | Why Adding a Second Server Logs Your Users Out | 5:46-6:19 | Fri 2026-11-13 | https://youtube.com/shorts/ggDdD1xyeoo |
+| `out/short-lag.mp4` | You Posted It, Refreshed, and It's Gone | 8:48-9:29 | Sun 2026-11-15 | https://youtube.com/shorts/uBRUyeOIIoI |
+
+Descriptions (hook line, then the main video link, then hashtags):
+- million: A million daily users sounds huge. Do the math and it's about 230 requests a second.
+- sessions: Add a second server and your users get logged out. Here's why, and the fix.
+- lag: You post a review, refresh, and it's gone. That's replication lag, and here's the fix.
+- then: Full video, one bottleneck at a time: https://youtu.be/2ZNj0XKxAOs / #shorts #systemdesign #scaling
