@@ -31,6 +31,8 @@ Chapters:
 09:33 Queues
 10:32 Recap
 
+More system design videos: https://www.youtube.com/playlist?list=PLfbnmCr3iUkc
+
 Sources and notes:
 - ChatGPT: one primary PostgreSQL server takes all writes, with nearly 50 read replicas, for 800 million users. OpenAI, Scaling PostgreSQL to power 800 million ChatGPT users (22 Jan 2026): https://openai.com/index/scaling-postgresql/
 - Database connection limit (5,000 per Azure PostgreSQL instance) and PgBouncer pooling: same OpenAI post.

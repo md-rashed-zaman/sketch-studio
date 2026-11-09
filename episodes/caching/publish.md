@@ -33,6 +33,8 @@ In this video we build caching from scratch: where to put a cache, how data gets
 9:21 Caches everywhere
 10:01 Recap
 
+More system design videos: https://www.youtube.com/playlist?list=PLfbnmCr3iUkc
+
 Sources and notes:
 - Latency numbers every programmer should know (Jeff Dean): main memory reference about 100 ns.
 - Redis eviction policies: https://redis.io/docs/latest/develop/reference/eviction/ (Redis defaults to noeviction; LRU and LFU are configurable)
@@ -40,7 +42,6 @@ Sources and notes:
 - Amazon DynamoDB Accelerator (DAX): https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
 - "Two hard things" quote: attributed to Phil Karlton (https://martinfowler.com/bliki/TwoHardThings.html)
 - Request counts, user counts and latencies in the diagrams are illustrative.
-
 
 #systemdesign #caching #softwareengineering
 
