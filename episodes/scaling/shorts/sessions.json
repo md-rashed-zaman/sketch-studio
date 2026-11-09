@@ -1,0 +1,533 @@
+{
+ "duration": 32.55,
+ "scenes": {
+  "scale-out": [
+   0,
+   18.7
+  ],
+  "stateless": [
+   18.7,
+   32.55
+  ]
+ },
+ "cues": {
+  "login": 2.999,
+  "next-click": 11.802,
+  "logged-out": 16.764,
+  "stateless": 23.727,
+  "session-store": 31.025
+ },
+ "captions": [
+  {
+   "text": " But",
+   "startMs": 178,
+   "endMs": 478,
+   "timestampMs": 178,
+   "confidence": null
+  },
+  {
+   "text": " watch",
+   "startMs": 1138,
+   "endMs": 1398,
+   "timestampMs": 1138,
+   "confidence": null
+  },
+  {
+   "text": " what",
+   "startMs": 1458,
+   "endMs": 1699,
+   "timestampMs": 1458,
+   "confidence": null
+  },
+  {
+   "text": " happens",
+   "startMs": 1739,
+   "endMs": 2199,
+   "timestampMs": 1739,
+   "confidence": null
+  },
+  {
+   "text": " when",
+   "startMs": 2319,
+   "endMs": 2499,
+   "timestampMs": 2319,
+   "confidence": null
+  },
+  {
+   "text": " you",
+   "startMs": 2519,
+   "endMs": 2639,
+   "timestampMs": 2519,
+   "confidence": null
+  },
+  {
+   "text": " log",
+   "startMs": 2679,
+   "endMs": 2879,
+   "timestampMs": 2679,
+   "confidence": null
+  },
+  {
+   "text": " in.",
+   "startMs": 2899,
+   "endMs": 2999,
+   "timestampMs": 2899,
+   "confidence": null
+  },
+  {
+   "text": " That",
+   "startMs": 3619,
+   "endMs": 3959,
+   "timestampMs": 3619,
+   "confidence": null
+  },
+  {
+   "text": " request",
+   "startMs": 4460,
+   "endMs": 4960,
+   "timestampMs": 4460,
+   "confidence": null
+  },
+  {
+   "text": " lands",
+   "startMs": 5100,
+   "endMs": 5420,
+   "timestampMs": 5100,
+   "confidence": null
+  },
+  {
+   "text": " on",
+   "startMs": 5600,
+   "endMs": 5760,
+   "timestampMs": 5600,
+   "confidence": null
+  },
+  {
+   "text": " server",
+   "startMs": 5760,
+   "endMs": 6260,
+   "timestampMs": 5760,
+   "confidence": null
+  },
+  {
+   "text": " A.",
+   "startMs": 6260,
+   "endMs": 6360,
+   "timestampMs": 6260,
+   "confidence": null
+  },
+  {
+   "text": " Server",
+   "startMs": 6420,
+   "endMs": 6961,
+   "timestampMs": 6420,
+   "confidence": null
+  },
+  {
+   "text": " A",
+   "startMs": 7121,
+   "endMs": 7281,
+   "timestampMs": 7121,
+   "confidence": null
+  },
+  {
+   "text": " remembers",
+   "startMs": 8481,
+   "endMs": 8961,
+   "timestampMs": 8481,
+   "confidence": null
+  },
+  {
+   "text": " you,",
+   "startMs": 8981,
+   "endMs": 9121,
+   "timestampMs": 8981,
+   "confidence": null
+  },
+  {
+   "text": " in",
+   "startMs": 9522,
+   "endMs": 9602,
+   "timestampMs": 9522,
+   "confidence": null
+  },
+  {
+   "text": " its",
+   "startMs": 9742,
+   "endMs": 9882,
+   "timestampMs": 9742,
+   "confidence": null
+  },
+  {
+   "text": " own",
+   "startMs": 10022,
+   "endMs": 10142,
+   "timestampMs": 10022,
+   "confidence": null
+  },
+  {
+   "text": " memory.",
+   "startMs": 10182,
+   "endMs": 10522,
+   "timestampMs": 10182,
+   "confidence": null
+  },
+  {
+   "text": " Your",
+   "startMs": 10942,
+   "endMs": 11102,
+   "timestampMs": 10942,
+   "confidence": null
+  },
+  {
+   "text": " next",
+   "startMs": 11182,
+   "endMs": 11442,
+   "timestampMs": 11182,
+   "confidence": null
+  },
+  {
+   "text": " click",
+   "startMs": 11462,
+   "endMs": 11802,
+   "timestampMs": 11462,
+   "confidence": null
+  },
+  {
+   "text": " goes",
+   "startMs": 11882,
+   "endMs": 12083,
+   "timestampMs": 11882,
+   "confidence": null
+  },
+  {
+   "text": " to",
+   "startMs": 12123,
+   "endMs": 12283,
+   "timestampMs": 12123,
+   "confidence": null
+  },
+  {
+   "text": " server",
+   "startMs": 12503,
+   "endMs": 12883,
+   "timestampMs": 12503,
+   "confidence": null
+  },
+  {
+   "text": " B.",
+   "startMs": 12903,
+   "endMs": 13103,
+   "timestampMs": 12903,
+   "confidence": null
+  },
+  {
+   "text": " And",
+   "startMs": 13763,
+   "endMs": 13863,
+   "timestampMs": 13763,
+   "confidence": null
+  },
+  {
+   "text": " server",
+   "startMs": 13923,
+   "endMs": 14303,
+   "timestampMs": 13923,
+   "confidence": null
+  },
+  {
+   "text": " B",
+   "startMs": 14323,
+   "endMs": 14483,
+   "timestampMs": 14323,
+   "confidence": null
+  },
+  {
+   "text": " has",
+   "startMs": 14523,
+   "endMs": 14704,
+   "timestampMs": 14523,
+   "confidence": null
+  },
+  {
+   "text": " never",
+   "startMs": 14784,
+   "endMs": 15084,
+   "timestampMs": 14784,
+   "confidence": null
+  },
+  {
+   "text": " heard",
+   "startMs": 15144,
+   "endMs": 15344,
+   "timestampMs": 15144,
+   "confidence": null
+  },
+  {
+   "text": " of",
+   "startMs": 15384,
+   "endMs": 15464,
+   "timestampMs": 15384,
+   "confidence": null
+  },
+  {
+   "text": " you.",
+   "startMs": 15524,
+   "endMs": 15604,
+   "timestampMs": 15524,
+   "confidence": null
+  },
+  {
+   "text": " You're",
+   "startMs": 16044,
+   "endMs": 16244,
+   "timestampMs": 16044,
+   "confidence": null
+  },
+  {
+   "text": " logged",
+   "startMs": 16284,
+   "endMs": 16504,
+   "timestampMs": 16284,
+   "confidence": null
+  },
+  {
+   "text": " out,",
+   "startMs": 16604,
+   "endMs": 16764,
+   "timestampMs": 16604,
+   "confidence": null
+  },
+  {
+   "text": " and",
+   "startMs": 17044,
+   "endMs": 17164,
+   "timestampMs": 17044,
+   "confidence": null
+  },
+  {
+   "text": " your",
+   "startMs": 17204,
+   "endMs": 17445,
+   "timestampMs": 17204,
+   "confidence": null
+  },
+  {
+   "text": " cart",
+   "startMs": 17485,
+   "endMs": 17745,
+   "timestampMs": 17485,
+   "confidence": null
+  },
+  {
+   "text": " is",
+   "startMs": 17805,
+   "endMs": 17925,
+   "timestampMs": 17805,
+   "confidence": null
+  },
+  {
+   "text": " empty.",
+   "startMs": 18085,
+   "endMs": 18365,
+   "timestampMs": 18085,
+   "confidence": null
+  },
+  {
+   "text": " The",
+   "startMs": 19005,
+   "endMs": 19125,
+   "timestampMs": 19005,
+   "confidence": null
+  },
+  {
+   "text": " fix",
+   "startMs": 19225,
+   "endMs": 19505,
+   "timestampMs": 19225,
+   "confidence": null
+  },
+  {
+   "text": " is",
+   "startMs": 19585,
+   "endMs": 19745,
+   "timestampMs": 19585,
+   "confidence": null
+  },
+  {
+   "text": " to",
+   "startMs": 20106,
+   "endMs": 20386,
+   "timestampMs": 20106,
+   "confidence": null
+  },
+  {
+   "text": " make",
+   "startMs": 21066,
+   "endMs": 21326,
+   "timestampMs": 21066,
+   "confidence": null
+  },
+  {
+   "text": " the",
+   "startMs": 21386,
+   "endMs": 21506,
+   "timestampMs": 21386,
+   "confidence": null
+  },
+  {
+   "text": " app",
+   "startMs": 21626,
+   "endMs": 21746,
+   "timestampMs": 21626,
+   "confidence": null
+  },
+  {
+   "text": " servers",
+   "startMs": 21766,
+   "endMs": 22466,
+   "timestampMs": 21766,
+   "confidence": null
+  },
+  {
+   "text": " stateless.",
+   "startMs": 23127,
+   "endMs": 23727,
+   "timestampMs": 23127,
+   "confidence": null
+  },
+  {
+   "text": " They",
+   "startMs": 24460,
+   "endMs": 24840,
+   "timestampMs": 24460,
+   "confidence": null
+  },
+  {
+   "text": " don't",
+   "startMs": 25181,
+   "endMs": 25461,
+   "timestampMs": 25181,
+   "confidence": null
+  },
+  {
+   "text": " keep",
+   "startMs": 25561,
+   "endMs": 25761,
+   "timestampMs": 25561,
+   "confidence": null
+  },
+  {
+   "text": " anything",
+   "startMs": 26001,
+   "endMs": 26421,
+   "timestampMs": 26001,
+   "confidence": null
+  },
+  {
+   "text": " about",
+   "startMs": 26482,
+   "endMs": 26742,
+   "timestampMs": 26482,
+   "confidence": null
+  },
+  {
+   "text": " you",
+   "startMs": 26782,
+   "endMs": 26962,
+   "timestampMs": 26782,
+   "confidence": null
+  },
+  {
+   "text": " in",
+   "startMs": 27182,
+   "endMs": 27282,
+   "timestampMs": 27182,
+   "confidence": null
+  },
+  {
+   "text": " their",
+   "startMs": 27342,
+   "endMs": 27562,
+   "timestampMs": 27342,
+   "confidence": null
+  },
+  {
+   "text": " own",
+   "startMs": 27682,
+   "endMs": 27802,
+   "timestampMs": 27682,
+   "confidence": null
+  },
+  {
+   "text": " memory.",
+   "startMs": 27843,
+   "endMs": 28183,
+   "timestampMs": 27843,
+   "confidence": null
+  },
+  {
+   "text": " Your",
+   "startMs": 28743,
+   "endMs": 29003,
+   "timestampMs": 28743,
+   "confidence": null
+  },
+  {
+   "text": " session",
+   "startMs": 29103,
+   "endMs": 29504,
+   "timestampMs": 29103,
+   "confidence": null
+  },
+  {
+   "text": " lives",
+   "startMs": 29564,
+   "endMs": 29824,
+   "timestampMs": 29564,
+   "confidence": null
+  },
+  {
+   "text": " in",
+   "startMs": 30024,
+   "endMs": 30104,
+   "timestampMs": 30024,
+   "confidence": null
+  },
+  {
+   "text": " a",
+   "startMs": 30204,
+   "endMs": 30264,
+   "timestampMs": 30204,
+   "confidence": null
+  },
+  {
+   "text": " shared",
+   "startMs": 30324,
+   "endMs": 30725,
+   "timestampMs": 30324,
+   "confidence": null
+  },
+  {
+   "text": " store,",
+   "startMs": 30745,
+   "endMs": 31025,
+   "timestampMs": 30745,
+   "confidence": null
+  },
+  {
+   "text": " like",
+   "startMs": 31505,
+   "endMs": 31705,
+   "timestampMs": 31505,
+   "confidence": null
+  },
+  {
+   "text": " Redis.",
+   "startMs": 31785,
+   "endMs": 32146,
+   "timestampMs": 31785,
+   "confidence": null
+  }
+ ]
+}

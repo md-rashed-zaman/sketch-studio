@@ -12,7 +12,7 @@ Recording: one file per scene in `audio/raw/`, named by scene number:
 
 ## scene: cold-open | pattern: scale-step
 Say you build a small online shop. {cue:shop} One server, one database, and it works.
-Then people start telling their friends. {cue:viral} A thousand users, then ten thousand, and one day, a million.
+Then people start telling their friends. {cue:viral} A thousand users, then {cue:viral-10k} ten thousand, and one day, {cue:viral-1m} a million.
 So which part breaks first? {cue:breaks}
 Most explanations answer that with a list of fifteen tools. {cue:tools} I want to do it differently.
 We'll grow this one app {cue:ladder} step by step, and we'll only add something new when we can see exactly what's breaking.
@@ -29,8 +29,8 @@ So let's say each of them clicks around a bit, {cue:clicks} and makes about twen
 That's twenty million requests a day. {cue:per-day} Sounds huge, right?
 But a day has eighty-six thousand four hundred seconds. {cue:seconds}
 Divide it out, and you get about two hundred and thirty requests a second. {cue:per-second}
-Now, traffic isn't flat. {cue:peak} People shop in the evening, and a sale can bring everyone at once,
-so plan for peaks five or ten times higher. Call it two thousand a second.
+Now, traffic isn't flat. People shop in the evening, and a sale can bring everyone at once,
+so plan for peaks five or ten times higher. Call it {cue:two-k} two thousand a second.
 That's real traffic, but it doesn't need anything exotic.
 Here's proof from the far end of the scale. In January twenty twenty-six, OpenAI wrote about the database behind ChatGPT. {cue:openai}
 Eight hundred million users, and one main database server still takes every single write. {cue:one-db}
@@ -66,9 +66,9 @@ Twice the cores, twice the memory, and you don't change a single line of code.
 Now the shop is ready {cue:ready-100k} for about a hundred thousand users.
 This is called vertical scaling, {cue:vertical} and people underrate it. It takes you a lot further than you'd expect.
 But it has two catches.
-First, there's a ceiling. {cue:ceiling} The biggest machines cost a lot more, and eventually there's no bigger one to buy.
-Second, it's still one machine. {cue:spof} If it crashes, or you restart it to deploy, the whole shop is down.
-That's what engineers call a single point of failure, and it's what pushes us to the next step.
+First, there's a ceiling. {cue:ceiling} The biggest machines cost a lot more, and eventually there's {cue:no-bigger} no bigger one to buy.
+Second, it's still one machine. {cue:spof} If it crashes, or you restart it to deploy, the {cue:shop-down} whole shop is down.
+That's what engineers call a {cue:spof-name} single point of failure, and it's what pushes us to the next step.
 
 ## scene: scale-out | pattern: failure-cascade
 So instead of one bigger server, {cue:second} we run two.
@@ -87,7 +87,7 @@ Cloud platforms can even do it for you, {cue:autoscale} adding servers when traf
 Now the shop is ready {cue:ready-300k} for a few hundred thousand users.
 
 ## scene: cache-cdn | pattern: request-path
-Traffic keeps climbing. {cue:300k} The app servers are fine, but every one of them is asking the same database.
+Traffic keeps climbing. {cue:300k} The app servers are fine, but every one of them is asking the {cue:same-db} same database.
 And most of what they ask is the same: {cue:same} the home page, the top products, the same few profiles.
 So we put a cache in front of the database {cue:cache} and keep the popular answers in memory.
 I made a whole video on caching, {cue:video} so I won't repeat it all here. It's linked above.
@@ -102,7 +102,7 @@ Now the shop is ready {cue:ready-1m} for about a million users.
 And the users keep coming. {cue:1m} Now the database is busy again.
 Part of the problem is connections. {cue:conns} Every app server keeps its own connections open, and with dozens of servers, that's thousands.
 A database only accepts so many. On OpenAI's, the limit is five thousand.
-So put a connection pooler in between, {cue:pooler} like PgBouncer. The app servers share a small set of connections, and that's exactly what OpenAI does.
+So put a connection pooler in between, {cue:pooler} like PgBouncer. The app servers share a {cue:shared} small set of connections, and that's exactly what OpenAI does.
 But the bigger problem is what the database is doing. Most requests are reads, {cue:reads} people browsing.
 Far fewer are writes, {cue:writes} like placing an order. In a shop, reads can easily outnumber writes ten to one.
 So we add read replicas. {cue:replicas}
@@ -116,7 +116,7 @@ Now the shop is ready {cue:ready-more} for millions of users.
 
 ## scene: queues | pattern: request-path
 Now let's look at what happens when someone places an order. {cue:order}
-We save the order, {cue:steps} charge the card, send a confirmation email, update the stock, and make an invoice.
+We save the order, {cue:steps} charge the card, {cue:step-email} send a confirmation email, {cue:step-stock} update the stock, and {cue:step-invoice} make an invoice.
 If the user waits for all of that, {cue:wait} checkout takes four seconds.
 And if the email service is slow, your checkout is slow too.
 So ask a simple question. What does the user actually need to wait for? {cue:need}
@@ -134,8 +134,8 @@ And that's really the whole method. Monitor your metrics. {cue:loop}
 Find the one part that's the bottleneck. {cue:find}
 Add the smallest fix. {cue:fix}
 Then keep monitoring, {cue:moves} because the bottleneck always moves somewhere new.
-There's more past this point, {cue:beyond} like splitting the database itself, or running in several regions.
-But most apps never need it, and if yours does, you'll have a team to help.
+There's more past this point, {cue:beyond} like {cue:sharding} splitting the database itself, or {cue:regions} running in several regions.
+But {cue:most-apps} most apps never need it, and if yours does, you'll have a team to help.
 So which step is your app at right now? {cue:comment} Tell me in the comments.
 And if you skipped the cache step, the caching video is the best place to go next. See you there.
 

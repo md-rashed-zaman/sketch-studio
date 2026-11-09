@@ -12,7 +12,16 @@ import {
   stampedeShortAudio,
   ttlShortAudio,
 } from '../episodes/caching/episode';
-import {ScalingEpisode, scalingAudio} from '../episodes/scaling/episode';
+import {
+  ScalingEpisode,
+  ScalingLagShort,
+  ScalingMillionShort,
+  ScalingSessionsShort,
+  lagShortAudio,
+  millionShortAudio,
+  scalingAudio,
+  sessionsShortAudio,
+} from '../episodes/scaling/episode';
 
 export const RemotionRoot = () => (
   <>
@@ -86,6 +95,33 @@ export const RemotionRoot = () => (
         id="caching-short-ttl"
         component={CachingTtlShort}
         calculateMetadata={durationFromAudio(ttlShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="scaling-short-million"
+        component={ScalingMillionShort}
+        calculateMetadata={durationFromAudio(millionShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="scaling-short-sessions"
+        component={ScalingSessionsShort}
+        calculateMetadata={durationFromAudio(sessionsShortAudio, 2)}
+        durationInFrames={FPS}
+        fps={FPS}
+        width={1080}
+        height={1920}
+      />
+      <Composition
+        id="scaling-short-lag"
+        component={ScalingLagShort}
+        calculateMetadata={durationFromAudio(lagShortAudio, 2)}
         durationInFrames={FPS}
         fps={FPS}
         width={1080}

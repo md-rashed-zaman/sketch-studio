@@ -14,17 +14,25 @@ import {
   metricRowsBox,
   PaperCard,
   progressAt,
+  stageArea,
   type,
   useSceneTime,
   type At,
   type Chapter,
   type DiagramChip,
   type DiagramNode,
+  type DiagramProps,
   type MetricRow,
 } from '../../kit';
 import timing from './timing.json';
+import millionShortTiming from './shorts/million.json';
+import sessionsShortTiming from './shorts/sessions.json';
+import lagShortTiming from './shorts/lag.json';
 
 export const scalingAudio = 'scaling/audio/voice.wav';
+export const millionShortAudio = 'scaling/shorts/million.wav';
+export const sessionsShortAudio = 'scaling/shorts/sessions.wav';
+export const lagShortAudio = 'scaling/shorts/lag.wav';
 
 // The cast (storyboard): one id, label and kind per component across every chapter, so chapters morph.
 const cast = {
@@ -101,7 +109,7 @@ const coldOpen: Chapter = {
     area: {x: 96, y: 160, w: 1084, h: 802},
     nodes: [node('users', 0, 0, 0.3), node('app', 560, 0, 0.36), node('app2', 560, 300, 'teaser-two')],
     edges: [
-      {from: 'users', to: 'app', at: 0.8, rate: [{at: 'shop', value: 1}, {at: 'viral', value: 4}, {at: 'viral+2.4', value: 14}, {at: 'teaser-two+0.6', value: 7}]},
+      {from: 'users', to: 'app', at: 0.8, rate: [{at: 'shop', value: 1}, {at: 'viral', value: 4}, {at: 'viral-1m', value: 14}, {at: 'teaser-two+0.6', value: 7}]},
       {from: 'users', to: 'app2', at: 'teaser-two+0.3', rate: [{at: 'teaser-two+0.6', value: 7}]},
     ],
     states: [
@@ -111,7 +119,7 @@ const coldOpen: Chapter = {
     ],
     chips: [
       {target: 'users', at: 'shop', until: 'viral', text: '1 user', tone: 'neutral'},
-      usersChip([{at: 'viral', value: 1000}, {at: 'viral+1.2', value: 10000}, {at: 'viral+2.4', value: 1000000}], 'viral'),
+      usersChip([{at: 'viral', value: 1000}, {at: 'viral-10k', value: 10000}, {at: 'viral-1m', value: 1000000}], 'viral'),
       {target: 'app', at: 'shop+0.6', text: 'shop + database', tone: 'neutral'},
       {target: 'users', at: 'teaser-out', text: 'logged out', tone: 'coral', icon: 'cross'},
     ],
@@ -150,7 +158,7 @@ const million: Chapter = {
         <HeroNumber at="per-second" suffix=" req/s" note="on average" steps={[{at: 'per-second', value: 0}, {at: 'per-second+0.05', value: 230}]} />
       </div>
       <Badge text="~100k online at once" tone="neutral" at="at-once+0.6" until="clicks" style={abs(176, 340)} />
-      <Badge text="peaks ×10 ≈ 2,000 req/s" tone="neutral" at="peak+1" style={abs(96, 680)} />
+      <Badge text="peaks ×10 ≈ 2,000 req/s" tone="neutral" at="two-k" style={abs(96, 680)} />
       <PaperCard at="openai" tilt={0} source="OpenAI Engineering, Jan 2026" style={abs(openaiCard.x, openaiCard.y, openaiCard.w)}>
         ChatGPT: 800M users, one main database server takes every write
       </PaperCard>
@@ -265,7 +273,7 @@ const scaleUp: Chapter = {
         {sizes.map((s) => (
           <Badge key={s.text} text={s.text} tone="neutral" at={s.at} until="spof" />
         ))}
-        <Badge text="nothing bigger" tone="coral" icon="cross" at="ceiling+1.6" until="spof" />
+        <Badge text="nothing bigger" tone="coral" icon="cross" at="no-bigger" until="spof" />
       </div>
       <Badge text="vertical scaling" tone="cobalt" big at="vertical" until="ceiling" style={abs(96, 660)} />
     </>
@@ -287,9 +295,9 @@ const scaleUp: Chapter = {
       usersChip([{at: 0, value: 10000}, {at: '50k', value: 50000}]),
       ready('ready-100k', 'ready for ~100k', 'spof'),
       {target: 'app', at: 'bigger', until: 'spof', text: '2× CPU, 2× RAM', tone: 'neutral'},
-      {target: 'app', at: 'spof+0.6', text: 'shop down', tone: 'coral', icon: 'cross'},
+      {target: 'app', at: 'shop-down', text: 'shop down', tone: 'coral', icon: 'cross'},
     ],
-    markers: [{at: 'spof+1.4', target: 'app', kind: 'cross', note: 'single point of failure', side: 'below'}],
+    markers: [{at: 'spof-name', target: 'app', kind: 'cross', note: 'single point of failure', side: 'below'}],
   },
 };
 
@@ -403,7 +411,7 @@ const cacheCdn: Chapter = {
       {from: 'app', to: 'db', at: 'same+1.2', label: 'GET /home'},
       {from: 'users', to: 'cdn', at: 'cdn+0.9'},
     ],
-    markers: [{at: '300k+1.2', until: 'cache', target: 'db', note: 'same reads', side: 'below'}],
+    markers: [{at: 'same-db', until: 'cache', target: 'db', note: 'same reads', side: 'below'}],
   },
 };
 
@@ -429,8 +437,8 @@ const replicas: Chapter = {
     chips: [
       usersChip([{at: 0, value: 300000}, {at: '1m', value: 1000000}]),
       {target: 'db', at: '1m', until: 'conns', text: 'overloaded', tone: 'coral', icon: 'cross'},
-      {target: 'db', at: 'conns', until: 'pooler+1', text: '4,900 / 5,000 connections', tone: 'coral', icon: 'cross'},
-      {target: 'db', at: 'pooler+1', until: 'reads', text: '200 connections', tone: 'mint', icon: 'check'},
+      {target: 'db', at: 'conns', until: 'shared', text: '4,900 / 5,000 connections', tone: 'coral', icon: 'cross'},
+      {target: 'db', at: 'shared', until: 'reads', text: '200 connections', tone: 'mint', icon: 'check'},
       {target: 'app', at: 'pooler', until: 'replicas', text: 'via PgBouncer', tone: 'neutral'},
       {target: 'db', at: 'reads', until: 'replicas', text: 'reads ×10', tone: 'neutral'},
       {target: 'db', at: 'writes', until: 'replicas', text: 'writes ×1', tone: 'neutral'},
@@ -465,9 +473,9 @@ const queues: Chapter = {
       rows={[
         {text: 'Save the order', at: 'steps', done: 'need+1'},
         {text: 'Charge the card', at: 'steps+0.6', done: 'need+1.3'},
-        {text: 'Send the email', at: 'steps+1.2'},
-        {text: 'Update the stock', at: 'steps+1.8'},
-        {text: 'Make the invoice', at: 'steps+2.4'},
+        {text: 'Send the email', at: 'step-email'},
+        {text: 'Update the stock', at: 'step-stock'},
+        {text: 'Make the invoice', at: 'step-invoice'},
       ]}
     />
   ),
@@ -513,10 +521,10 @@ const recap: Chapter = {
       />
       <Marker at="moves+0.6" until="beyond" kind="bracket" box={{...checklistRowBox(method, 0), w: 560, h: 3 * 84 + 60}} note="repeat" side="right" />
       <div style={{...abs(96, 620), display: 'flex', gap: 16}}>
-        <Badge text="sharding" tone="neutral" at="beyond" />
-        <Badge text="multi-region" tone="neutral" at="beyond+0.3" />
+        <Badge text="sharding" tone="neutral" at="sharding" />
+        <Badge text="multi-region" tone="neutral" at="regions" />
       </div>
-      <Badge text="most apps never need these" tone="note" at="beyond+1.2" style={abs(96, 700)} />
+      <Badge text="most apps never need these" tone="note" at="most-apps" style={abs(96, 700)} />
       <PaperCard small tilt={0} at="comment" style={abs(96, 800)}>
         Which step is your app at?
       </PaperCard>
@@ -564,5 +572,149 @@ export const ScalingEpisode = () => (
       queues,
       recap,
     }}
+  />
+);
+
+// Shorts (cut with tools/cut_short.py): portrait layouts that only use the cues inside each cut. Every Short opens
+// on a moving diagram. Chips, edge and packet labels sit below the 52 px Shorts floor at these zooms, so node
+// colors, markers and the captions carry those words.
+const shortStage = stageArea['9:16'];
+// 72 px lines and 38 px badges scaled to clear the 52 px floor and fit the 828 px stage.
+const LINES_SCALE = 0.8;
+const BADGE_SCALE = 1.4;
+const LINE_H = 104 * LINES_SCALE;
+const scaled = (x: number, y: number, scale: number) => ({position: 'absolute' as const, left: x, top: y, transform: `scale(${scale})`, transformOrigin: 'top left'});
+// Top band: the users -> app stream from frame one, replaced by the 230 req/s answer. Bottom band: the math.
+const topBand = {x: shortStage.x, y: shortStage.y, w: shortStage.w, h: 330};
+const linesTop = topBand.y + topBand.h + 40;
+const MillionShortHud = () => (
+  <>
+    <div style={scaled(shortStage.x, linesTop, LINES_SCALE)}>
+      <div style={{width: shortStage.w / LINES_SCALE}}>
+        <Line at="users">1,000,000 users a day</Line>
+        <Line at="clicks" op="×">20 requests each</Line>
+        <Line at="per-day" op="=">20,000,000 a day</Line>
+        <Line at="seconds" op="÷">86,400 seconds</Line>
+      </div>
+    </div>
+    <div style={scaled(shortStage.x, linesTop + LINE_H + 8, BADGE_SCALE)}>
+      <Badge text="~100k online at once" tone="neutral" at="at-once+0.6" until="clicks" />
+    </div>
+    <div style={abs(shortStage.x, topBand.y)}>
+      <HeroNumber at="per-second+0.4" suffix=" req/s" note="on average" steps={[{at: 'per-second', value: 0}, {at: 'per-second+0.45', value: 230}]} />
+    </div>
+    <div style={scaled(shortStage.x, topBand.y + 232, BADGE_SCALE)}>
+      <Badge text="peaks ×10 ≈ 2,000 req/s" tone="neutral" at="two-k" />
+    </div>
+  </>
+);
+const millionPortrait: DiagramProps = {
+  area: topBand,
+  nodes: [node('users', -200, 0, 0, 'per-second'), node('app', 160, 0, 0, 'per-second')],
+  edges: [{from: 'users', to: 'app', at: 0, rate: [{at: 0, value: 6}, {at: 'users', value: 14}]}],
+};
+export const ScalingMillionShort = () => (
+  <Episode
+    timing={millionShortTiming}
+    audio={millionShortAudio}
+    scenes={{million: {chapter: million.chapter, title: <>What <Em>1M users</Em> means</>, hud: MillionShortHud, diagram: millionPortrait}}}
+    captions
+  />
+);
+
+// Two scenes (cut_short.py splits the cut at "The fix"). 1: users fork to B (upper) and A (lower), as in the long
+// video; your login lands on A, your next click on B, which has never met you. 2: the servers glide left and the
+// shared session store arrives on the right, so both servers can find your session. This cut never names the load
+// balancer, and users, servers and the store in one row would shrink the labels below the Shorts floor.
+const sessionsPortrait: DiagramProps = {
+  nodes: [
+    node('users', -170, 0),
+    node('app', 170, 120, 0, undefined, {label: 'Server A'}),
+    node('app2', 170, -120, 0, undefined, {label: 'Server B', sub: undefined}),
+  ],
+  edges: [
+    {from: 'users', to: 'app', at: 0, rate: [{at: 0, value: 3}, {at: 'login', value: 0}]},
+    {from: 'users', to: 'app2', at: 0, rate: [{at: 0, value: 3}, {at: 'login', value: 0}]},
+  ],
+  states: [
+    {target: 'app', state: 'ok', at: 'login+1.1'},
+    {target: 'app', state: 'idle', at: 'logged-out'},
+    {target: 'app2', state: 'hot', at: 'logged-out'},
+  ],
+  packets: [
+    {from: 'users', to: 'app', at: 'login'},
+    {from: 'users', to: 'app2', at: 'next-click'},
+  ],
+  markers: [{at: 'logged-out+0.6', target: 'app2'}], // no note: the captions say it
+};
+const statelessPortrait: DiagramProps = {
+  nodes: [
+    node('app', -150, 120, 0, undefined, {label: 'Server A'}),
+    node('app2', -150, -120, 0, undefined, {label: 'Server B', sub: undefined}),
+    node('sessions', 230, 0, 'stateless'),
+  ],
+  edges: [
+    {from: 'app', to: 'sessions', at: 'stateless+0.3'},
+    {from: 'app2', to: 'sessions', at: 'stateless+0.4'},
+  ],
+  states: [
+    {target: 'sessions', state: 'ok', at: 'session-store'},
+    {target: 'app2', state: 'idle', at: 0},
+    {target: 'app2', state: 'ok', at: 'session-store+1.1'},
+  ],
+  packets: [
+    {from: 'app', to: 'sessions', at: 'stateless+1.2'}, // your session leaves A's memory
+    {from: 'app2', to: 'sessions', at: 'session-store'},
+    {from: 'sessions', to: 'app2', at: 'session-store+0.6', tone: 'mint'},
+  ],
+};
+export const ScalingSessionsShort = () => (
+  <Episode
+    timing={sessionsShortTiming}
+    audio={sessionsShortAudio}
+    scenes={{
+      'scale-out': {chapter: scaleOut.chapter, title: <>Run <Em>two</Em> servers</>, diagram: sessionsPortrait},
+      stateless: {chapter: 'STATELESS', title: <>Make them <Em>stateless</Em></>, diagram: statelessPortrait},
+    }}
+    captions
+  />
+);
+
+// Users beside the app servers; the copies below-left and the main database below-right, so reads and writes
+// fork from the app's bottom and the copy line runs main -> copies without crossing anything.
+const lagPortrait: DiagramProps = {
+  nodes: [
+    node('users', -235, 0),
+    node('app', 80, 0, 0, undefined, {label: 'App servers'}),
+    node('replica', -80, 270, 'replicas'),
+    node('db', 210, 270),
+  ],
+  edges: [
+    {from: 'users', to: 'app', at: 0, rate: 6},
+    {from: 'app', to: 'db', at: 0, rate: [{at: 0, value: 12}, {at: 'primary', value: 1}]},
+    {from: 'app', to: 'replica', at: 'primary', rate: [{at: 'primary+0.4', value: 10}, {at: 'post', value: 0}, {at: 'own+2', value: 8}]},
+    {from: 'db', to: 'replica', at: 'replicas+0.4', dashed: true},
+  ],
+  states: [
+    {target: 'db', state: 'hot', at: 0},
+    {target: 'db', state: 'idle', at: 'primary'},
+    {target: 'replica', state: 'hot', at: 'gone'},
+    {target: 'replica', state: 'idle', at: 'own'},
+  ],
+  packets: [
+    {from: 'users', to: 'app', at: 'post'},
+    {from: 'app', to: 'db', at: 'post+1.1'},
+    {from: 'app', to: 'replica', at: 'post+2.4'},
+    {from: 'app', to: 'db', at: 'own'},
+    {from: 'db', to: 'app', at: 'own+1', tone: 'mint'},
+  ],
+  markers: [{at: 'gone+0.6', until: 'own', target: 'replica'}], // no note: room for the fork; the captions say it
+};
+export const ScalingLagShort = () => (
+  <Episode
+    timing={lagShortTiming}
+    audio={lagShortAudio}
+    scenes={{replicas: {chapter: replicas.chapter, title: <>Replication <Em>lag</Em></>, diagram: lagPortrait}}}
+    captions
   />
 );

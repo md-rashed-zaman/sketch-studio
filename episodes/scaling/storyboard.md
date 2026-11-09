@@ -36,7 +36,7 @@ Layout: `users → app`, the app box holds the whole shop.
 | cue | visual |
 |---|---|
 | shop | users and app sketch in; users chip `1 user` (neutral); a slow dot stream |
-| viral | users counter rolls 1,000 → 10,000 → 1,000,000 (coral over 100k); stream thickens |
+| viral, viral-10k, viral-1m | users counter rolls 1,000 → 10,000 → 1,000,000 on each spoken number (coral over 100k); stream thickens on "a million" |
 | breaks | app turns hot; marker circle on app, note "what breaks?" |
 | tools | a dim pile of tool badges (load balancer, CDN, Kafka, sharding ...) fades in and is crossed out (marker "not a list") |
 | ladder | the tool pile leaves; a milestone ladder climbs on the right, bottom to top: 10k ↑ 50k ↑ 100k ↑ 300k ↑ 1M (neutral chips, no fixes named) |
@@ -54,7 +54,7 @@ No diagram. A stepper of hero numbers (HeroNumber + small paper cards), one step
 | per-day | `= 20,000,000` a day |
 | seconds | `÷ 86,400` seconds |
 | per-second | hero `≈ 230 req/s` (mint) |
-| peak | badge `peaks ×10 ≈ 2,000 req/s` under the stack |
+| two-k | badge `peaks ×10 ≈ 2,000 req/s` under the stack, on "two thousand" |
 | openai | paper card: "ChatGPT: 800M users, one main database server takes every write", source "OpenAI Engineering, Jan 2026" |
 | one-db | marker circle on the card, note "just one" |
 
@@ -86,8 +86,8 @@ No diagram. A stepper of hero numbers (HeroNumber + small paper cards), one step
 | bigger | app box gets a "2× CPU, 2× RAM" chip; CPU rolls to 45% (mint) |
 | ready-100k | users chip "✓ ready for ~100k" (mint) until spof |
 | vertical | badge "vertical scaling" |
-| ceiling | a cost-vs-size bar row: S, M, L, XL; the last one coral "no bigger one" |
-| spof | app goes dim, users chip "shop down", marker cross on app, note "single point of failure" |
+| ceiling | a cost-vs-size bar row: S, M, L, XL; the coral "nothing bigger" badge lands on no-bigger |
+| spof, shop-down, spof-name | app goes dim; users chip "shop down" on shop-down; marker cross on app, note "single point of failure" on spof-name |
 
 ### 6 scale-out: "Run more servers" (no title card; the scene pays off the cold-open teaser without naming it)
 Layout: A sits below B, so at the chapter 7 morph A glides up into "App servers" and never crosses "Photos (S3)".
@@ -127,7 +127,7 @@ Layout: A sits below B, so at the chapter 7 morph A glides up into "App servers"
 |---|---|
 | 1m | users → 1,000,000; db hot |
 | conns | db chip "4,900 / 5,000 connections" (coral ✕) |
-| pooler | chip "via PgBouncer" under the app servers; db chip "200 connections" (mint), db stays hot |
+| pooler, shared | chip "via PgBouncer" under the app servers; db chip "200 connections" (mint) on shared, db stays hot |
 | reads | a cobalt stream labeled "reads" (thick) |
 | writes | a thin stream "writes" |
 | replicas | `replica` ×2 sketch in under db, dashed copy lines |
@@ -142,7 +142,7 @@ Layout: A sits below B, so at the chapter 7 morph A glides up into "App servers"
 | cue | visual |
 |---|---|
 | order | a checkout packet arrives at app |
-| steps | Checklist of 5 steps: save order, charge card, send email, update stock, make invoice |
+| steps, step-email, step-stock, step-invoice | Checklist of 5 steps, each row on its spoken step: save order, charge card, send email, update stock, make invoice |
 | wait | a timer chip `4 s` (coral) |
 | need | rows 1-2 stay bright, rows 3-5 dim |
 | queue | `queue` sketches in; rows 3-5 slide into it as job chips |
@@ -158,5 +158,5 @@ Layout: A sits below B, so at the chapter 7 morph A glides up into "App servers"
 | find | find the bottleneck |
 | fix | add the smallest fix |
 | moves | keep monitoring (bracket marker "repeat") |
-| beyond | dim badges "sharding", "multi-region" with note "later, maybe never" |
+| sharding, regions, most-apps | dim badges "sharding", "multi-region" on their words; note "most apps never need these" on most-apps |
 | comment | paper card "Which step are you at?"; right half clears for the end screen |
